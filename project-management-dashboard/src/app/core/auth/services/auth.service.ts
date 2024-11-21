@@ -4,12 +4,24 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  private validCredentials = { username: 'admin', password: 'admin123' };
+  private loggedIn = false; 
+
+  constructor() {}
 
   login(username: string, password: string): boolean {
-    return (
-      username === this.validCredentials.username &&
-      password === this.validCredentials.password
-    );
+    // Simulate a successful login
+    if (username === 'admin' && password === 'admin123') {
+      this.loggedIn = true;
+      return true;
+    }
+    return false;
+  }
+
+  logout(): void {
+    this.loggedIn = false;
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn;
   }
 }

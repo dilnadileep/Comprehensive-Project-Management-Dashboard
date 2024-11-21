@@ -1,6 +1,6 @@
-$primary-color: #6c5ce7; /* Violet */
-$secondary-color: #fdcb6e; /* Light Yellow */
-$background-color: #2d3436; /* Dark background */
+$primary-color: #4a90e2; /* Soft Blue */
+$secondary-color: #f5a623; /* Light Orange */
+$background-color: #f5f5f5; /* Light Gray Background */
 $white: #fff;
 
 .login-container {
@@ -14,8 +14,8 @@ $white: #fff;
 .login-form {
   background: $white;
   padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 350px;
   text-align: center;
 
@@ -23,7 +23,7 @@ $white: #fff;
     color: $primary-color;
     margin-bottom: 20px;
     font-size: 2.5rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
 
   .form-group {
@@ -40,16 +40,16 @@ $white: #fff;
     input {
       width: 100%;
       padding: 12px;
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
-      background: #f6f6f6;
+      background: #fafafa;
       color: #333;
 
       &:focus {
         border-color: $primary-color;
         outline: none;
-        box-shadow: 0 0 6px rgba(108, 92, 231, 0.5);
+        box-shadow: 0 0 6px rgba(74, 144, 226, 0.5);
       }
     }
   }

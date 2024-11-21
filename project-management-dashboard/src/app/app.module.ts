@@ -10,7 +10,7 @@ import { DashboardComponent } from './features/pages/dashboard/dashboard.compone
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoginComponent,ggbbgrgtr
     DashboardComponent,
   ],
   imports: [

@@ -1,0 +1,56 @@
+/* Violet */
+/* Light Yellow */
+/* Light background */
+.dashboard-container {
+  padding: 30px;
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+.dashboard-container h1 {
+  text-align: center;
+  color: #6c5ce7;
+  font-size: 3rem;
+  margin-bottom: 30px;
+  font-family: "Montserrat", sans-serif;
+}
+.dashboard-container .sections {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.dashboard-container .sections .section-card {
+  background: #fff;
+  width: 270px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.dashboard-container .sections .section-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.dashboard-container .sections .section-card h2 {
+  color: #6c5ce7;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+.dashboard-container .sections .section-card p {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+.dashboard-container .sections .section-card .btn-secondary {
+  padding: 10px 20px;
+  background: #fdcb6e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.dashboard-container .sections .section-card .btn-secondary:hover {
+  background: #fcb93c;
+}/*# sourceMappingURL=dashboard.component.css.map */

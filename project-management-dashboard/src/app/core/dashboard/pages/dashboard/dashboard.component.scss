@@ -1,0 +1,67 @@
+$primary-color: #6c5ce7; /* Violet */
+$secondary-color: #fdcb6e; /* Light Yellow */
+$background-color: #f4f6f9; /* Light background */
+$white: #fff;
+$card-bg: #fff;
+
+.dashboard-container {
+  padding: 30px;
+  background: $background-color;
+  min-height: 100vh;
+
+  h1 {
+    text-align: center;
+    color: $primary-color;
+    font-size: 3rem;
+    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .sections {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    .section-card {
+      background: $card-bg;
+      width: 270px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        color: $primary-color;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      p {
+        color: #555;
+        margin-bottom: 20px;
+        font-size: 1rem;
+      }
+
+      .btn-secondary {
+        padding: 10px 20px;
+        background: $secondary-color;
+        color: $white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+
+        &:hover {
+          background: darken($secondary-color, 10%);
+        }
+      }
+    }
+  }
+}

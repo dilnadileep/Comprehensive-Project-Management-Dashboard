@@ -1,0 +1,77 @@
+$primary-color: #6c5ce7; /* Violet */
+$secondary-color: #fdcb6e; /* Light Yellow */
+$background-color: #2d3436; /* Dark background */
+$white: #fff;
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: $background-color;
+}
+
+.login-form {
+  background: $white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+
+  h1 {
+    color: $primary-color;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      color: #555;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f6f6f6;
+      color: #333;
+
+      &:focus {
+        border-color: $primary-color;
+        outline: none;
+        box-shadow: 0 0 6px rgba(108, 92, 231, 0.5);
+      }
+    }
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: $primary-color;
+    color: $white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background: darken($primary-color, 10%);
+    }
+  }
+
+  .error-message {
+    color: red;
+    margin-top: 15px;
+  }
+}

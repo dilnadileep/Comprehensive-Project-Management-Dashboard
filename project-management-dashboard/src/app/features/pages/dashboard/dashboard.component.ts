@@ -6,9 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  sections = [
-    { title: 'Projects', description: 'Manage your projects and deadlines.' },
-    { title: 'Tasks', description: 'Track tasks assigned to team members.' },
-    { title: 'Team Members', description: 'View and manage team members.' },
-  ];
+  // The sections data is no longer directly displayed on the dashboard
+  // because the navigation bar handles navigation to these sections.
+  message = 'Welcome to the Project Management Dashboard!';
 }

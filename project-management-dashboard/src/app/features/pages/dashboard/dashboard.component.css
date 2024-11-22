@@ -1,56 +1,66 @@
-/* Violet */
-/* Light Yellow */
-/* Light background */
+/* dashboard.component.scss */
 .dashboard-container {
-  padding: 30px;
-  background: #f4f6f9;
+  background-color: #d7e8fa; /* Soft light background color */
+  background-size: cover;
+  background-position: center;
   min-height: 100vh;
-}
-.dashboard-container h1 {
-  text-align: center;
-  color: #6c5ce7;
-  font-size: 3rem;
-  margin-bottom: 30px;
-  font-family: "Montserrat", sans-serif;
-}
-.dashboard-container .sections {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: flex-start; /* Align content to the left */
+  align-items: flex-start; /* Align content to the top */
+  padding: 40px 60px; /* Add space on the left and right */
+  color: #333; /* Darker text for readability */
 }
-.dashboard-container .sections .section-card {
-  background: #fff;
-  width: 270px;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
+
+.dashboard-content {
+  max-width: 800px; /* Limit the content width */
 }
-.dashboard-container .sections .section-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-.dashboard-container .sections .section-card h2 {
-  color: #6c5ce7;
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-.dashboard-container .sections .section-card p {
-  color: #555;
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
   margin-bottom: 20px;
-  font-size: 1rem;
+  color: #333;
+  line-height: 1.2;
 }
-.dashboard-container .sections .section-card .btn-secondary {
-  padding: 10px 20px;
-  background: #fdcb6e;
-  color: #fff;
-  border: none;
+
+p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: #0066cc; /* Primary button color */
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 15px 30px;
   border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
 }
-.dashboard-container .sections .section-card .btn-secondary:hover {
-  background: #fcb93c;
+
+.cta-button:hover {
+  background-color: #004d99; /* Darker shade on hover */
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .cta-button {
+    font-size: 0.9rem;
+    padding: 12px 24px;
+  }
 }/*# sourceMappingURL=dashboard.component.css.map */

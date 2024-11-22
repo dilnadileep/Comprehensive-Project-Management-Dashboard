@@ -1,67 +1,69 @@
-$primary-color: #6c5ce7; /* Violet */
-$secondary-color: #fdcb6e; /* Light Yellow */
-$background-color: #f4f6f9; /* Light background */
-$white: #fff;
-$card-bg: #fff;
-
+/* dashboard.component.scss */
 .dashboard-container {
-  padding: 30px;
-  background: $background-color;
+  background-color: #d7e8fa; /* Soft light background color */
+  background-size: cover;
+  background-position: center;
   min-height: 100vh;
+  display: flex;
+  justify-content: flex-start; /* Align content to the left */
+  align-items: flex-start; /* Align content to the top */
+  padding: 40px 60px; /* Add space on the left and right */
+  color: #333; /* Darker text for readability */
+}
 
-  h1 {
-    text-align: center;
-    color: $primary-color;
-    font-size: 3rem;
-    margin-bottom: 30px;
-    font-family: 'Montserrat', sans-serif;
+.dashboard-content {
+  max-width: 800px; /* Limit the content width */
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #333;
+  line-height: 1.2;
+}
+
+p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: #0066cc; /* Primary button color */
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 15px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #004d99; /* Darker shade on hover */
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
   }
 
-  .sections {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  h1 {
+    font-size: 2.5rem;
+  }
 
-    .section-card {
-      background: $card-bg;
-      width: 270px;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
+  p {
+    font-size: 1rem;
+  }
 
-      &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      }
-
-      h2 {
-        color: $primary-color;
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-      }
-
-      p {
-        color: #555;
-        margin-bottom: 20px;
-        font-size: 1rem;
-      }
-
-      .btn-secondary {
-        padding: 10px 20px;
-        background: $secondary-color;
-        color: $white;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s;
-
-        &:hover {
-          background: darken($secondary-color, 10%);
-        }
-      }
-    }
+  .cta-button {
+    font-size: 0.9rem;
+    padding: 12px 24px;
   }
 }

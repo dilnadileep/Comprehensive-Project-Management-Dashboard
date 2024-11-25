@@ -1,10 +1,12 @@
 /* navbar.component.scss */
 .navbar {
-  background-color: #aad0fb; /* Light, calm background color */
+  background-color: black; /* Light, calm background color */
   padding: 15px;
   height: 3rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  font-family: Arial, sans-serif; /* Clean font */
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
+  margin: 10px;
 }
 
 .nav-links {
@@ -22,7 +24,7 @@
 
 .nav-links a {
   text-decoration: none;
-  color: #180a4c; /* Darker text for readability */
+  color: white; /* Darker text for readability */
   font-size: 18px;
   font-weight: 510;
   padding: 10px 15px;

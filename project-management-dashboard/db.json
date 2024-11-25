@@ -1,0 +1,52 @@
+{
+  "projects": [
+    {
+      "id": "6bb2",
+      "name": "Outfitter",
+      "description": "Online tailoring shop",
+      "deadline": "2024-11-30"
+    },
+    {
+      "id": "caa8",
+      "name": "outfitter",
+      "description": "tailoring shop",
+      "deadline": "2024-12-01"
+    },
+    {
+      "id": "aa13",
+      "name": "outfitter",
+      "description": "tailoring shop",
+      "deadline": "2024-11-23"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "name": "Task 1",
+      "assignedTo": "John Doe",
+      "status": "Pending",
+      "deadline": "2024-11-30",
+      "projectId": 1
+    },
+    {
+      "id": "2",
+      "name": "Task 2",
+      "assignedTo": "Jane Smith",
+      "status": "Completed",
+      "deadline": "2024-11-28",
+      "projectId": 2
+    }
+  ],
+  "teamMembers": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "role": "Developer"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "role": "Designer"
+    }
+  ]
+}

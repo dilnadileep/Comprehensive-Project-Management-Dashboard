@@ -1,33 +1,27 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root', 
 })
 export class ProjectService {
-  private projects: { id: number; name: string; description: string; deadline: string }[] = [];
+  private apiUrl = 'http://localhost:3000/projects'; 
 
-  constructor() {}
+  constructor(private http: HttpClient) {} // Injects the HttpClient service for HTTP requests
 
-  // Get all projects
-  getProjects() {
-    return this.projects;
+  getProjects(): Observable<any[]> {
+    // Fetches the list of projects from the API
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  // Add a new project
-  addProject(project: { name: string; description: string; deadline: string }) {
-    const newProject = {
-      id: this.projects.length + 1,  // Generate a unique id based on length (or use a better method)
-      ...project
-    };
-    this.projects.push(newProject);
+  addProject(project: any): Observable<any> {
+    // Sends a request to add a new project to the API
+    return this.http.post<any>(this.apiUrl, project);
   }
 
-  // Delete a project by id
-  deleteProject(id: number) {
-    const index = this.projects.findIndex(project => project.id === id);
-    if (index > -1) {
-      this.projects.splice(index, 1);
-    }
+  deleteProject(id: number): Observable<void> {
+    // Sends a request to delete a project by its ID
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
-

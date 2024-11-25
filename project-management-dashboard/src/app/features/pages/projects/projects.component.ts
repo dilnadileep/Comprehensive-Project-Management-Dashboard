@@ -2,41 +2,46 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+  selector: 'app-projects', 
+  templateUrl: './projects.component.html', 
+  styleUrls: ['./projects.component.scss'], 
 })
 export class ProjectsComponent implements OnInit {
+  projects: any[] = []; // Holds the list of projects fetched from the service
   isModalOpen: boolean = false;
   newProject = { name: '', description: '', deadline: '' };
-  projects: any[] = [];  // Initialize projects as an empty array
 
   constructor(private projectService: ProjectService) {}
 
-  ngOnInit() {
-    // Fetch projects once the component is initialized
-    this.projects = this.projectService.getProjects();
+  ngOnInit(): void {
+    // Initializes the component by fetching the list of projects
+    this.projectService.getProjects().subscribe((data: any[]) => {
+      this.projects = data;
+    });
   }
 
-  openModal() {
+  openModal(): void {
+    // Opens the modal for adding a new project
     this.isModalOpen = true;
   }
 
-  closeModal() {
+  closeModal(): void {
+    // Closes the modal
     this.isModalOpen = false;
-    this.newProject = { name: '', description: '', deadline: '' };  // Reset form
   }
 
-  addProject() {
-    if (this.newProject.name && this.newProject.description && this.newProject.deadline) {
-      this.projectService.addProject(this.newProject);  // Use service to add project
+  addProject(): void {
+    // Adds a new project and updates the list
+    this.projectService.addProject(this.newProject).subscribe((project) => {
+      this.projects.push(project);
       this.closeModal();
-    } else {
-      alert('Please fill all the fields.');
-    }
+    });
   }
 
-  deleteProject(id: number) {
-    this.projectService.deleteProject(id);  // Pass only the id to the service
+  deleteProject(id: number): void {
+    // Deletes a project and updates the list
+    this.projectService.deleteProject(id).subscribe(() => {
+      this.projects = this.projects.filter((project) => project.id !== id);
+    });
   }
 }

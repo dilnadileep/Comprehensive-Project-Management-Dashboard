@@ -1,12 +1,6 @@
 {
   "projects": [
     {
-      "id": "6bb2",
-      "name": "Outfitter",
-      "description": "Online tailoring shop",
-      "deadline": "2024-11-30"
-    },
-    {
       "id": "caa8",
       "name": "outfitter",
       "description": "tailoring shop",
@@ -17,6 +11,18 @@
       "name": "outfitter",
       "description": "tailoring shop",
       "deadline": "2024-11-23"
+    },
+    {
+      "id": "2b73",
+      "name": "dcm c",
+      "description": "cn dm ",
+      "deadline": "2024-11-29"
+    },
+    {
+      "id": "0d0f",
+      "name": "fm vm mv",
+      "description": "mdmfmfe",
+      "deadline": "2024-12-01"
     }
   ],
   "tasks": [

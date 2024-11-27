@@ -4,6 +4,7 @@ import { LoginComponent } from './core/auth/pages/login/login.component';
 import { DashboardComponent } from './features/pages/dashboard/dashboard.component';
 import { ProjectsComponent } from './features/pages/projects/projects.component';
 import { AuthGuard } from './core/auth/guards/auth.guard';
+import { TasksComponent } from './features/pages/tasks/tasks.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsComponent,
+    canActivate: [AuthGuard], 
+  },
+  {
+    path: 'tasks',
+    component: TasksComponent,
     canActivate: [AuthGuard], 
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },

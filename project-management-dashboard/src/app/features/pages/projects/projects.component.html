@@ -1,38 +1,44 @@
 <div class="container">
-  <h2>Projects</h2>
-  <button (click)="openModal()" class="btn btn-primary">Add Project</button>
+  <header class="page-header">
+    <h2>Manage Your Projects</h2>
+    <p class="page-subtitle">
+      Organize, track, and complete your projects with ease. Add new projects, set deadlines, and monitor progress all in one place.
+    </p>
+    <button (click)="openModal()" class="btn btn-primary">+ Add Project</button>
+  </header>
 
   <!-- Projects Table -->
-  <table *ngIf="projects.length > 0" class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Deadline</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let project of projects">
-        <td>{{ project.name }}</td>
-        <td>{{ project.description }}</td>
-        <td>{{ project.deadline }}</td>
-        <td>
-          <button (click)="deleteProject(project.id)" class="btn btn-danger">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <p *ngIf="projects.length === 0">No projects added yet.</p>
+  <section class="projects-section">
+    <table *ngIf="projects.length > 0" class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Deadline</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of projects">
+          <td>{{ project.name }}</td>
+          <td>{{ project.description }}</td>
+          <td>{{ project.deadline }}</td>
+          <td>
+            <button (click)="deleteProject(project.id)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="projects.length === 0" class="no-projects">No projects found. Add a new project to get started.</p>
+  </section>
 
   <!-- Modal -->
   <div class="modal" *ngIf="isModalOpen">
     <div class="modal-content">
-      <h4>Add Project</h4>
+      <h4 align="center">Add New Project</h4>
       <form (ngSubmit)="addProject()" #projectForm="ngForm" novalidate>
-        <!-- Name Input -->
         <div class="form-group">
-          <label for="name">Name</label>
+          <label for="name">Project Name</label>
           <input
             id="name"
             [(ngModel)]="newProject.name"
@@ -43,14 +49,12 @@
             [class.is-invalid]="name.invalid && name.touched"
           />
           <div *ngIf="name.invalid && name.touched" class="text-danger">
-            Name is required.
+            Project name is required.
           </div>
         </div>
-
-        <!-- Description Input -->
         <div class="form-group">
           <label for="description">Description</label>
-          <input
+          <textarea
             id="description"
             [(ngModel)]="newProject.description"
             name="description"
@@ -58,37 +62,35 @@
             #description="ngModel"
             class="form-control"
             [class.is-invalid]="description.invalid && description.touched"
-          />
+          ></textarea>
           <div *ngIf="description.invalid && description.touched" class="text-danger">
             Description is required.
           </div>
         </div>
-
-        <!-- Deadline Input -->
         <div class="form-group">
           <label for="deadline">Deadline</label>
           <input
-            id="deadline"
-            type="date"
-            [(ngModel)]="newProject.deadline"
-            name="deadline"
-            required
-            #deadline="ngModel"
-            class="form-control"
-            [class.is-invalid]="deadline.invalid && deadline.touched"
-          />
+          id="deadline"
+          type="date"
+          [(ngModel)]="newProject.deadline"
+          name="deadline"
+          required
+          #deadline="ngModel"
+          class="form-control"
+          [class.is-invalid]="deadline.invalid && deadline.touched"
+          [attr.min]="minDate"
+        />
+        
           <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
             Deadline is required.
           </div>
-        </div>
-
-        <!-- Buttons -->
+        </div><br>
         <div class="form-actions">
-          
-          <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Save</button>
-          <button type="button" (click)="closeModal()" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="submitbtn" [disabled]="projectForm.invalid">Save</button>
+          <button type="button" (click)="closeModal()" class="cancelbtn">Cancel</button>
         </div>
       </form>
     </div>
   </div>
+  
 </div>

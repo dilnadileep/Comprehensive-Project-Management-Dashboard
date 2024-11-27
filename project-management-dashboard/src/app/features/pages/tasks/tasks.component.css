@@ -20,7 +20,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
 }
-.page-header .page-subtitle {
+.page-header p {
   font-size: 1rem;
   color: #b0b0b0;
   margin-bottom: 20px;
@@ -42,35 +42,80 @@ body {
   border-color: black;
 }
 
-.projects-section {
-  background-color: rgba(237, 234, 234, 0.2); /* Transparent header */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
 }
-.projects-section .table {
+.filters .filter-dropdown {
+  font-size: 1rem;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: #707171;
+  color: white;
+}
+.filters .btn-primary {
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.filters .btn-primary:hover {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+.filters .sortbtn {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: #707171;
+  color: white;
+  border: 2px solid white;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.filters .sortbtn:hover {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+
+.table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
-.projects-section .table th, .projects-section .table td {
+.table th, .table td {
   text-align: left;
   padding: 12px 15px;
   border: 1px solid #333;
 }
-.projects-section .table th {
+.table th {
   background-color: #2c2c2c;
   color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.projects-section .table td {
+.table td {
   background-color: rgba(237, 234, 234, 0.2);
 }
-.projects-section .table tr:hover {
+.table tr:hover {
   background-color: #939292;
 }
-.projects-section .no-projects {
+
+.no-tasks {
   text-align: center;
   font-size: 1.2rem;
   color: #888;
@@ -100,11 +145,6 @@ body {
   width: 100%;
   overflow-y: auto; /* Allow scrolling if content overflows */
   transition: transform 0.3s ease-out;
-}
-
-.text-danger {
-  color: rgb(248, 76, 76);
-  font-size: 0.875rem;
 }
 
 h4 {
@@ -181,15 +221,6 @@ label {
   margin-top: 20px;
 }
 
-@media (max-width: 600px) {
-  .modal-content {
-    padding: 20px;
-    max-width: 90%;
-  }
-  .submitbtn, .cancelbtn {
-    width: 48%; /* Ensure buttons are not too wide */
-  }
-}
 /* Button Styles */
 .btn {
   font-family: inherit;
@@ -234,4 +265,13 @@ label {
   .table th, .table td {
     padding: 8px;
   }
-}/*# sourceMappingURL=projects.component.css.map */
+}
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 20px;
+    max-width: 90%;
+  }
+  .submitbtn, .cancelbtn {
+    width: 48%; /* Ensure buttons are not too wide */
+  }
+}/*# sourceMappingURL=tasks.component.css.map */

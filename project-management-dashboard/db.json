@@ -1,46 +1,39 @@
 {
   "projects": [
     {
-      "id": "caa8",
-      "name": "outfitter",
-      "description": "tailoring shop",
-      "deadline": "2024-12-01"
+      "id": "1c75",
+      "name": "dkmkd",
+      "description": "mkdkdkmdfsk",
+      "deadline": "2024-11-30"
     },
     {
-      "id": "aa13",
-      "name": "outfitter",
-      "description": "tailoring shop",
-      "deadline": "2024-11-23"
-    },
-    {
-      "id": "2b73",
-      "name": "dcm c",
-      "description": "cn dm ",
-      "deadline": "2024-11-29"
-    },
-    {
-      "id": "0d0f",
-      "name": "fm vm mv",
-      "description": "mdmfmfe",
-      "deadline": "2024-12-01"
+      "id": "1f48",
+      "name": "sxa",
+      "description": "ddewew",
+      "deadline": "2024-12-07"
     }
   ],
   "tasks": [
     {
-      "id": "1",
-      "name": "Task 1",
-      "assignedTo": "John Doe",
+      "id": "a8fc",
+      "name": "medula",
+      "assignedTo": "delna",
       "status": "Pending",
-      "deadline": "2024-11-30",
-      "projectId": 1
+      "deadline": "2024-12-07"
     },
     {
-      "id": "2",
-      "name": "Task 2",
-      "assignedTo": "Jane Smith",
+      "id": "8acf",
+      "name": "rony",
+      "assignedTo": "Dilna",
       "status": "Completed",
-      "deadline": "2024-11-28",
-      "projectId": 2
+      "deadline": "2024-12-07"
+    },
+    {
+      "id": "be5e",
+      "name": "dsm  dcmmmcs",
+      "assignedTo": "dwdfsw",
+      "status": "Pending",
+      "deadline": "2024-11-08"
     }
   ],
   "teamMembers": [

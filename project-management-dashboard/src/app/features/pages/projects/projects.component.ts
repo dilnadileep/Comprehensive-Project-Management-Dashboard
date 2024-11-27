@@ -10,10 +10,15 @@ export class ProjectsComponent implements OnInit {
   projects: any[] = []; // Holds the list of projects fetched from the service
   isModalOpen: boolean = false;
   newProject = { name: '', description: '', deadline: '' };
+  minDate: string = ''; // This will store the minimum allowed date
 
   constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
+    // Set the minDate to today's date in the format YYYY-MM-DD
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0];
+
     // Initializes the component by fetching the list of projects
     this.projectService.getProjects().subscribe((data: any[]) => {
       this.projects = data;
@@ -35,6 +40,8 @@ export class ProjectsComponent implements OnInit {
     this.projectService.addProject(this.newProject).subscribe((project) => {
       this.projects.push(project);
       this.closeModal();
+      // Reset the form fields after adding a project
+      this.newProject = { name: '', description: '', deadline: '' };
     });
   }
 

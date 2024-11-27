@@ -10,6 +10,7 @@ import { DashboardComponent } from './features/pages/dashboard/dashboard.compone
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ProjectsComponent } from './features/pages/projects/projects.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TasksComponent } from './features/pages/tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     NavbarComponent,
     ProjectsComponent,
+    TasksComponent,
     ],
   imports: [
     BrowserModule,

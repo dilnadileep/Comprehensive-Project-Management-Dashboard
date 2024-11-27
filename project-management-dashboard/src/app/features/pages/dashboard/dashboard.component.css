@@ -8,32 +8,40 @@
   background-image: url("https://img.freepik.com/premium-vector/abstract-dark-background-zeros-ad-ones-shades-gray-colors_444390-3371.jpg?semt=ais_hybrid");
   background-size: cover;
 }
-
-.image-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.content-container {
+.main-content .content-container {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 600px;
+  order: 1;
+}
+.main-content .image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  order: 2;
 }
 
+@media (max-width: 1024px) {
+  .main-content {
+    flex-direction: column;
+    padding: 30px;
+  }
+  .main-content .content-container, .main-content .image-container {
+    order: unset;
+  }
+}
 .content-container h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: bold;
   margin-bottom: 15px;
   color: white;
-  text-transform: uppercase;
 }
 
 .intro-text {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: white;
   line-height: 1.6;
   margin-bottom: 30px;
@@ -41,11 +49,11 @@
 
 .cta-button {
   padding: 15px 30px;
-  background-color: rgb(127, 124, 124);
+  background-color: rgb(187, 187, 187);
   color: black;
   text-decoration: none;
   border-radius: 5px;
-  width: 150px;
+  width: 130px;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1rem;

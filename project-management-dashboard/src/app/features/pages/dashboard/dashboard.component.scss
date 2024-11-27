@@ -10,42 +10,48 @@ $white-col: white;
   min-height: 500px;
   background-image: url("https://img.freepik.com/premium-vector/abstract-dark-background-zeros-ad-ones-shades-gray-colors_444390-3371.jpg?semt=ais_hybrid");
   background-size: cover;
+
+  // Adjust the order of the containers
+  .content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 600px;
+    order: 1; // Move to the left
+  }
+
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: 2; // Move to the right
+  }
 }
 
-.image-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@media (max-width: 1024px) {
+  .main-content {
+    flex-direction: column; 
+    padding: 30px;
+
+    .content-container, .image-container {
+      order: unset; 
+    }
+  }
 }
 
-// .image-container img {
-//   width: 100%;
-//   max-width: 350px;
-//   height: auto;
-//   object-fit: cover;
-//   border-radius: 15px;
-//   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-// }
-
-.content-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 600px;
-}
 
 .content-container h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: bold;
   margin-bottom: 15px;
   color: $white-col;
-  text-transform: uppercase; 
+  // text-transform: uppercase; 
 }
 
 .intro-text {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: $white-col;
   line-height: 1.6;
   margin-bottom: 30px; 
@@ -53,11 +59,11 @@ $white-col: white;
 
 .cta-button {
   padding: 15px 30px;
-  background-color: rgb(127, 124, 124);
+  background-color: rgb(187, 187, 187);
   color: $black-col;
   text-decoration: none;
   border-radius: 5px;
-  width: 150px;
+  width: 130px;
   font-weight: bold;
   text-transform: uppercase; 
   font-size: 1rem;

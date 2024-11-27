@@ -1,0 +1,72 @@
+<div class="container">
+    <header class="page-header">
+      <h2>Task List</h2>
+      <p>Manage your tasks effectively by filtering, sorting, and updating the list.</p>
+      <button (click)="openModal()" class="btn btn-primary">+ Add Task</button>
+    </header>
+  
+    <div class="filters">
+      <select [(ngModel)]="filterBy" (change)="filterTasks()" class="filter-dropdown">
+        <option value="">Filter by Status</option>
+        <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
+      </select>
+      <button (click)="sortByDeadline()" class="btn btn-primary">Sort by Deadline</button>
+    </div>
+  
+    <table *ngIf="filteredTasks.length > 0" class="table">
+      <thead>
+        <tr>
+          <th>Task Name</th>
+          <th>Assigned To</th>
+          <th>Status</th>
+          <th>Deadline</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of filteredTasks">
+          <td>{{ task.name }}</td>
+          <td>{{ task.assignedTo }}</td>
+          <td>{{ task.status }}</td>
+          <td>{{ task.deadline }}</td>
+          <td>
+            <button (click)="openModal(task)" class="btn btn-warning">Edit</button>&nbsp;&nbsp;&nbsp;
+            <button (click)="deleteTask(task.id)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="filteredTasks.length === 0" class="no-tasks">No tasks found.</p>
+  
+    <!-- Modal -->
+    <div class="modal" *ngIf="isModalOpen">
+      <div class="modal-content">
+        <h4 align="center">{{ isEditing ? 'Edit Task' : 'Add Task' }}</h4>
+        <form (ngSubmit)="saveTask()" #taskForm="ngForm" novalidate>
+          <div class="form-group">
+            <label for="name">Task Name</label>
+            <input id="name" [(ngModel)]="currentTask.name" name="name" required class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="assignedTo">Assigned To</label>
+            <input id="assignedTo" [(ngModel)]="currentTask.assignedTo" name="assignedTo" required class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" [(ngModel)]="currentTask.status" name="status" required class="form-control">
+              <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="deadline">Deadline</label>
+            <input id="deadline" type="date" [(ngModel)]="currentTask.deadline" name="deadline" required class="form-control" />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="submitbtn" [disabled]="taskForm.invalid">Save</button>
+            <button type="button" (click)="closeModal()" class="cancelbtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

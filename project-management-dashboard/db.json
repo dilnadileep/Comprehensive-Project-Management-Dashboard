@@ -1,39 +1,33 @@
 {
   "projects": [
     {
-      "id": "1c75",
-      "name": "dkmkd",
-      "description": "mkdkdkmdfsk",
-      "deadline": "2024-11-30"
-    },
-    {
-      "id": "1f48",
-      "name": "sxa",
-      "description": "ddewew",
-      "deadline": "2024-12-07"
+      "id": "ba68",
+      "name": "delna",
+      "description": "mariya",
+      "deadline": "2024-12-08"
     }
   ],
   "tasks": [
     {
       "id": "a8fc",
       "name": "medula",
-      "assignedTo": "delna",
+      "assignedTo": "delna maria",
       "status": "Pending",
       "deadline": "2024-12-07"
     },
     {
-      "id": "8acf",
-      "name": "rony",
-      "assignedTo": "Dilna",
+      "id": "faf0",
+      "name": "DILNA DILE",
+      "assignedTo": "Rony",
       "status": "Completed",
-      "deadline": "2024-12-07"
+      "deadline": "2024-12-08"
     },
     {
-      "id": "be5e",
-      "name": "dsm  dcmmmcs",
-      "assignedTo": "dwdfsw",
-      "status": "Pending",
-      "deadline": "2024-11-08"
+      "id": "d578",
+      "name": "Alan ",
+      "assignedTo": "browny",
+      "status": "Completed",
+      "deadline": "2024-11-30"
     }
   ],
   "teamMembers": [

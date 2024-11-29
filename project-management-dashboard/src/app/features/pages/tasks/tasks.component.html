@@ -30,7 +30,7 @@
           <td>{{ task.status }}</td>
           <td>{{ task.deadline }}</td>
           <td>
-            <button (click)="openModal(task)" class="btn btn-warning">Edit</button>&nbsp;&nbsp;&nbsp;
+            <button (click)="openEditModal(task)" class="btn btn-warning">Edit</button>&nbsp;&nbsp;&nbsp;
             <button (click)="deleteTask(task.id)" class="btn btn-danger">Delete</button>
           </td>
         </tr>
@@ -41,32 +41,176 @@
     <!-- Modal -->
     <div class="modal" *ngIf="isModalOpen">
       <div class="modal-content">
-        <h4 align="center">{{ isEditing ? 'Edit Task' : 'Add Task' }}</h4>
+        <h4 align="center">Add Task</h4>
         <form (ngSubmit)="saveTask()" #taskForm="ngForm" novalidate>
+          <!-- Task Name Field -->
           <div class="form-group">
             <label for="name">Task Name</label>
-            <input id="name" [(ngModel)]="currentTask.name" name="name" required class="form-control" />
+            <input
+              id="name"
+              [(ngModel)]="currentTask.name"
+              name="name"
+              required
+              class="form-control"
+              #name="ngModel"
+              [class.is-invalid]="name.invalid && name.touched"
+            />
+            <div *ngIf="name.invalid && name.touched" class="text-danger">
+              Task Name is required.
+            </div>
           </div>
+    
+          <!-- Assigned To Field -->
           <div class="form-group">
             <label for="assignedTo">Assigned To</label>
-            <input id="assignedTo" [(ngModel)]="currentTask.assignedTo" name="assignedTo" required class="form-control" />
+            <input
+              id="assignedTo"
+              [(ngModel)]="currentTask.assignedTo"
+              name="assignedTo"
+              required
+              class="form-control"
+              #assignedTo="ngModel"
+              [class.is-invalid]="assignedTo.invalid && assignedTo.touched"
+            />
+            <div *ngIf="assignedTo.invalid && assignedTo.touched" class="text-danger">
+              Assigned To is required.
+            </div>
           </div>
+    
+          <!-- Status Field -->
           <div class="form-group">
             <label for="status">Status</label>
-            <select id="status" [(ngModel)]="currentTask.status" name="status" required class="form-control">
+            <select
+              id="status"
+              [(ngModel)]="currentTask.status"
+              name="status"
+              required
+              class="form-control"
+              #status="ngModel"
+              [class.is-invalid]="status.invalid && status.touched"
+            >
+              <option value="" disabled>Select Status</option>
               <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
             </select>
+            <div *ngIf="status.invalid && status.touched" class="text-danger">
+              Status is required.
+            </div>
           </div>
+    
+          <!-- Deadline Field -->
           <div class="form-group">
             <label for="deadline">Deadline</label>
-            <input id="deadline" type="date" [(ngModel)]="currentTask.deadline" name="deadline" required class="form-control" />
+            <input
+              id="deadline"
+              type="date"
+              [(ngModel)]="currentTask.deadline"
+              name="deadline"
+              required
+              class="form-control"
+              [attr.min]="minDate"
+              #deadline="ngModel"
+              [class.is-invalid]="deadline.invalid && deadline.touched"
+            />
+            <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
+              Deadline is required.
+            </div>
           </div>
-          <div class="form-actions">
+    
+          <!-- Form Actions -->
+          <div class="form-actions mt-3">
             <button type="submit" class="submitbtn" [disabled]="taskForm.invalid">Save</button>
             <button type="button" (click)="closeModal()" class="cancelbtn">Cancel</button>
           </div>
         </form>
       </div>
     </div>
+    
+
+        <!-- edit Modal -->
+
+    <div class="modal" *ngIf="isEditModalOpen">
+      <div class="modal-content">
+        <h4>Edit Task</h4>
+        <form (ngSubmit)="editTask()" #editForm="ngForm" novalidate>
+          <!-- Task Name Field -->
+          <div class="form-group">
+            <label for="taskName">Task Name</label>
+            <input
+              id="taskName"
+              [(ngModel)]="selectedTask.name"
+              name="name"
+              required
+              #name="ngModel"
+              class="form-control"
+              [class.is-invalid]="name.invalid && name.touched"
+            />
+            <div *ngIf="name.invalid && name.touched" class="text-danger">
+              Task Name is required.
+            </div>
+          </div>
+    
+          <!-- Assigned To Field -->
+          <div class="form-group">
+            <label for="assignedTo">Assigned To</label>
+            <input
+              id="assignedTo"
+              [(ngModel)]="selectedTask.assignedTo"
+              name="assignedTo"
+              required
+              #assignedTo="ngModel"
+              class="form-control"
+              [class.is-invalid]="assignedTo.invalid && assignedTo.touched"
+            />
+            <div *ngIf="assignedTo.invalid && assignedTo.touched" class="text-danger">
+              Assigned To is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select
+              id="status"
+              [(ngModel)]="selectedTask.status"
+              name="status"
+              required
+              #status="ngModel"
+              class="form-control"
+              [class.is-invalid]="status.invalid && status.touched"
+            >
+              <option value="" disabled>Select Status</option>
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+            </select>
+            <div *ngIf="status.invalid && status.touched" class="text-danger">
+              Status is required.
+            </div>
+          </div>
+    
+          <!-- Deadline Field -->
+          <div class="form-group">
+            <label for="deadline">Deadline</label>
+            <input
+              id="deadline"
+              type="date"
+              [(ngModel)]="selectedTask.deadline"
+              name="deadline"
+              required
+              #deadline="ngModel"
+              class="form-control"
+              [class.is-invalid]="deadline.invalid && deadline.touched"
+            />
+            <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
+              Deadline is required.
+            </div>
+          </div>
+    
+          <!-- Form Buttons -->
+          <div class="form-actions mt-3">
+            <button type="submit" class="submitbtn" [disabled]="editForm.invalid">Save Changes</button>
+            <button type="button" class="cancelbtn" (click)="closeEditModal()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
   </div>
   

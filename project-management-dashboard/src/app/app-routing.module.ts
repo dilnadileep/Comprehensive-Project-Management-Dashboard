@@ -5,6 +5,7 @@ import { DashboardComponent } from './features/pages/dashboard/dashboard.compone
 import { ProjectsComponent } from './features/pages/projects/projects.component';
 import { AuthGuard } from './core/auth/guards/auth.guard';
 import { TasksComponent } from './features/pages/tasks/tasks.component';
+import { TeamMembersComponent } from './features/pages/team-members/team-members.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'tasks',
     component: TasksComponent,
+    canActivate: [AuthGuard], 
+  },
+  {
+    path: 'team-members',
+    component: TeamMembersComponent,
     canActivate: [AuthGuard], 
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },

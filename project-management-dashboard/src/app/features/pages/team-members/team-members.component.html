@@ -1,0 +1,65 @@
+<div class="team-members-container">
+    <h2>Team Members</h2>
+    <button class="add-btn" (click)="openAddModal()">Add Member</button>
+  
+    <table class="team-members-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Assigned To</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of teamMembers">
+          <td>{{ member.name }}</td>
+          <td>{{ member.role }}</td>
+          <td>{{ member.assignedTo || 'Not Assigned' }}</td>
+          <td>
+            <button (click)="openEditModal(member)">Edit</button>
+            <button (click)="deleteMember(member.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Add Member Modal -->
+  <div class="modal" *ngIf="isAddModalOpen">
+    <div class="modal-content">
+      <h3>Add Team Member</h3>
+      <form (ngSubmit)="saveNewMember()" #addForm="ngForm" novalidate>
+        <label>Name</label>
+        <input type="text" [(ngModel)]="newMember.name" name="name" required />
+        <label>Role</label>
+        <input type="text" [(ngModel)]="newMember.role" name="role" required />
+        <label>Assign To</label>
+        <select [(ngModel)]="newMember.assignedTo" name="assignedTo">
+          <option *ngFor="let project of projects" [value]="project.name">{{ project.name }}</option>
+        </select>
+        <button type="submit" [disabled]="addForm.invalid">Save</button>
+        <button type="button" (click)="closeAddModal()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Edit Member Modal -->
+  <div class="modal" *ngIf="isEditModalOpen">
+    <div class="modal-content">
+      <h3>Edit Team Member</h3>
+      <form (ngSubmit)="saveEditedMember()" #editForm="ngForm" novalidate>
+        <label>Name</label>
+        <input type="text" [(ngModel)]="selectedMember.name" name="name" required />
+        <label>Role</label>
+        <input type="text" [(ngModel)]="selectedMember.role" name="role" required />
+        <label>Assign To</label>
+        <select [(ngModel)]="selectedMember.assignedTo" name="assignedTo">
+          <option *ngFor="let project of projects" [value]="project.name">{{ project.name }}</option>
+        </select>
+        <button type="submit" [disabled]="editForm.invalid">Save</button>
+        <button type="button" (click)="closeEditModal()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  

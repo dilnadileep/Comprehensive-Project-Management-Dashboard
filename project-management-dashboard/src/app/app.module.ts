@@ -11,6 +11,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ProjectsComponent } from './features/pages/projects/projects.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TasksComponent } from './features/pages/tasks/tasks.component';
+import { TeamMembersComponent } from './features/pages/team-members/team-members.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TasksComponent } from './features/pages/tasks/tasks.component';
     NavbarComponent,
     ProjectsComponent,
     TasksComponent,
+    TeamMembersComponent,
     ],
   imports: [
     BrowserModule,

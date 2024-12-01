@@ -1,45 +1,54 @@
 {
   "projects": [
     {
-      "id": "ba68",
-      "name": "delna",
-      "description": "mariya",
-      "deadline": "2024-12-08"
+      "id": "7b79",
+      "name": "Outfitter",
+      "description": "good",
+      "deadline": "2024-12-29"
+    },
+    {
+      "id": "8c88",
+      "name": "Killerbean",
+      "description": "funny",
+      "deadline": "2025-01-05"
+    },
+    {
+      "id": "53c3",
+      "name": "Ferrero rocher",
+      "description": "Good enogh",
+      "deadline": "2024-12-29"
     }
   ],
   "tasks": [
     {
-      "id": "a8fc",
-      "name": "medula",
-      "assignedTo": "delna maria",
+      "id": "984f",
+      "name": "Diary",
+      "assignedTo": "Milk",
       "status": "Pending",
-      "deadline": "2024-12-07"
+      "deadline": "2025-02-01",
+      "projectId": "8c88"
     },
     {
-      "id": "faf0",
-      "name": "DILNA DILE",
-      "assignedTo": "Rony",
-      "status": "Completed",
-      "deadline": "2024-12-08"
-    },
-    {
-      "id": "d578",
-      "name": "Alan ",
-      "assignedTo": "browny",
-      "status": "Completed",
-      "deadline": "2024-11-30"
+      "id": "646b",
+      "name": "Nice",
+      "assignedTo": "Benny",
+      "status": "Pending",
+      "deadline": "2024-12-14",
+      "projectId": "53c3"
     }
   ],
   "teamMembers": [
     {
-      "id": "1",
-      "name": "John Doe",
-      "role": "Developer"
-    },
-    {
       "id": "2",
       "name": "Jane Smith",
-      "role": "Designer"
+      "role": "Designer",
+      "assignedTo": "Outfitter"
+    },
+    {
+      "id": "c453",
+      "name": "DILNA DILEEP",
+      "role": "Deve",
+      "assignedTo": "Outfitter"
     }
   ]
 }

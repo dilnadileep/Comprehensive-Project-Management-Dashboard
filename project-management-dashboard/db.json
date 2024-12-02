@@ -17,6 +17,12 @@
       "name": "Ferrero rocher",
       "description": "Good enogh",
       "deadline": "2024-12-29"
+    },
+    {
+      "id": "ded7",
+      "name": "Teacherslum",
+      "description": "Bad",
+      "deadline": "2025-01-05"
     }
   ],
   "tasks": [
@@ -35,20 +41,44 @@
       "status": "Pending",
       "deadline": "2024-12-14",
       "projectId": "53c3"
+    },
+    {
+      "id": "5730",
+      "name": "Sofy",
+      "assignedTo": "Mariya",
+      "status": "Completed",
+      "deadline": "2024-12-04",
+      "projectId": "7b79"
+    },
+    {
+      "id": "7cb1",
+      "name": "Caloritracker",
+      "assignedTo": "Rony",
+      "status": "Completed",
+      "deadline": "2025-01-03",
+      "projectId": "8c88"
     }
   ],
   "teamMembers": [
     {
-      "id": "2",
-      "name": "Jane Smith",
-      "role": "Designer",
-      "assignedTo": "Outfitter"
-    },
-    {
-      "id": "c453",
+      "id": "2d82",
       "name": "DILNA DILEEP",
       "role": "Deve",
-      "assignedTo": "Outfitter"
+      "projectId": "53c3",
+      "taskId": "5730"
+    },
+    {
+      "id": "ae0b",
+      "name": "DILNA DILEEP",
+      "role": "Designer",
+      "projectId": "",
+      "taskId": "646b"
+    },
+    {
+      "id": "1c1c",
+      "name": "Dev p",
+      "role": "Hr",
+      "projectId": "53c3"
     }
   ]
 }

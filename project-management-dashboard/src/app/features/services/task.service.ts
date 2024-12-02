@@ -6,23 +6,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:3000/tasks'; // JSON server endpoint
+  private readonly endpoint = '/tasks'; // Relative endpoint
 
   constructor(private http: HttpClient) {}
 
   getTasks(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.endpoint);
   }
 
   addTask(task: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, task);
-  }  
-
-  updateTask(task: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${task.id}`, task);
+    return this.http.post(this.endpoint, task);
   }
 
-  deleteTask(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  updateTask(task: any): Observable<any> {
+    return this.http.put(`${this.endpoint}/${task.id}`, task);
+  }
+
+  deleteTask(taskId: number): Observable<any> {
+    return this.http.delete(`${this.endpoint}/${taskId}`);
   }
 }

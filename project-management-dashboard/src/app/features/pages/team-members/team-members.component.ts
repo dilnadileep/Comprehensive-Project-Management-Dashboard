@@ -1,84 +1,104 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamMemberService } from '../../services/team-member.service';
+import { ProjectService } from '../../services/project.service';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-team-members',
   templateUrl: './team-members.component.html',
-  styleUrls: ['./team-members.component.scss']
+  styleUrls: ['./team-members.component.scss'],
 })
 export class TeamMembersComponent implements OnInit {
   teamMembers: any[] = [];
   projects: any[] = [];
+  tasks: any[] = [];
   isAddModalOpen: boolean = false;
-  isEditModalOpen: boolean = false;
-  newMember = { name: '', role: '', assignedTo: '' };
-  selectedMember: any = null;
-
-  constructor(private teamMemberService: TeamMemberService) {}
+  isModalOpen: boolean = false;
+  assignTo: 'project' | 'task' = 'project';  // To determine if the modal is for assigning to a project or task
+  selectedAssignId: any;
+  selectedMember: any;
+  newTeamMember: any = { name: '', role: '', projectId: null };
+  
+  constructor(
+    private teamMemberService: TeamMemberService,
+    private projectService: ProjectService,
+    private taskService: TaskService
+  ) {}
 
   ngOnInit(): void {
     this.loadTeamMembers();
     this.loadProjects();
+    this.loadTasks();
   }
 
-  // Fetch team members
   loadTeamMembers(): void {
     this.teamMemberService.getTeamMembers().subscribe((data) => {
       this.teamMembers = data;
     });
   }
 
-  // Fetch projects for assignment dropdown
   loadProjects(): void {
-    this.teamMemberService.getProjects().subscribe((data) => {
+    this.projectService.getProjects().subscribe((data) => {
       this.projects = data;
     });
   }
 
-  // Open Add Modal
+  loadTasks(): void {
+    this.taskService.getTasks().subscribe((data) => {
+      this.tasks = data;
+    });
+  }
+
   openAddModal(): void {
-    this.newMember = { name: '', role: '', assignedTo: '' };
     this.isAddModalOpen = true;
   }
 
-  // Close Add Modal
   closeAddModal(): void {
     this.isAddModalOpen = false;
+    this.newTeamMember = { name: '', role: '', projectId: null }; // Reset form
   }
 
-  // Save New Member
-  saveNewMember(): void {
-    this.teamMemberService.addMember(this.newMember).subscribe(() => {
+  saveTeamMember(): void {
+    this.teamMemberService.addTeamMember(this.newTeamMember).subscribe(() => {
       this.loadTeamMembers();
-      this.closeAddModal();
+      this.closeAddModal();  // Close modal after saving
     });
   }
 
-  // Open Edit Modal
-  openEditModal(member: any): void {
-    this.selectedMember = { ...member }; // Clone the member object to avoid direct mutation
-    this.isEditModalOpen = true;
+  openModal(member: any, type: 'project' | 'task'): void {
+    this.selectedMember = member;
+    this.assignTo = type;
+    this.isModalOpen = true;
   }
 
-  // Close Edit Modal
-  closeEditModal(): void {
-    this.isEditModalOpen = false;
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.selectedAssignId = null; // Reset selection
   }
 
-  // Save Edited Member
-  saveEditedMember(): void {
-    this.teamMemberService.updateMember(this.selectedMember).subscribe(() => {
-      this.loadTeamMembers();
-      this.closeEditModal();
-    });
-  }
-
-  // Delete a Member
-  deleteMember(id: number): void {
-    if (confirm('Are you sure you want to delete this member?')) {
-      this.teamMemberService.deleteMember(id).subscribe(() => {
-        this.loadTeamMembers();
+  assignMember(): void {
+    if (this.selectedAssignId !== null) {
+      if (this.assignTo === 'project') {
+        this.selectedMember.projectId = this.selectedAssignId;
+      } else if (this.assignTo === 'task') {
+        this.selectedMember.taskId = this.selectedAssignId;
+      }
+  
+      // Save the updated team member to the server
+      this.teamMemberService.updateTeamMember(this.selectedMember).subscribe(() => {
+        this.loadTeamMembers(); // Refresh the team members list
+        this.closeModal();
       });
     }
   }
+  
+  getProjectName(projectId: number): string {
+    const project = this.projects.find(p => p.id === projectId);
+    return project ? project.name : 'No project assigned';
+  }
+  getTaskName(taskId: number): string {
+    const task = this.tasks.find(t => t.id === taskId);
+    return task ? task.name : 'No task assigned'; // Assuming tasks have a 'title' property
+  }
+  
 }

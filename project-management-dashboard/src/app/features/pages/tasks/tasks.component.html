@@ -20,7 +20,7 @@
           <th>Assigned To</th>
           <th>Status</th>
           <th>Deadline</th>
-          <th>Associated Project</th> <!-- Added Project Column -->
+          <th>Associated Project</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -30,10 +30,7 @@
           <td>{{ task.assignedTo }}</td>
           <td>{{ task.status }}</td>
           <td>{{ task.deadline }}</td>
-          <td>
-            <!-- Display associated project name -->
-            {{ getProjectName(task.projectId) }}
-          </td>
+          <td>{{ task.projectId | projectName:projects }}</td> <!-- pipe -->
           <td>
             <button (click)="openEditModal(task)" class="btn btn-warning">Edit</button>&nbsp;&nbsp;&nbsp;
             <button (click)="deleteTask(task.id)" class="btn btn-danger">Delete</button>
@@ -41,6 +38,7 @@
         </tr>
       </tbody>
     </table>
+    
     
     <p *ngIf="filteredTasks.length === 0" class="no-tasks">No tasks found.</p>
   
@@ -210,6 +208,7 @@
                   required
                   #deadline="ngModel"
                   class="form-control"
+                  [attr.min]="minDate"
                   [class.is-invalid]="deadline.invalid && deadline.touched"
                 />
                 <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">

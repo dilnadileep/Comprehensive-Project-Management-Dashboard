@@ -1,65 +1,85 @@
 <div class="team-members-container">
-    <h2>Team Members</h2>
-    <button class="add-btn" (click)="openAddModal()">Add Member</button>
+  <h2>Team Members</h2>
+  <button class="btn btn-primary" (click)="openAddModal()">Add New Team Member</button>
+
+  <!-- Team Members Table -->
+  <table *ngIf="teamMembers.length > 0" class="table">
+    <thead>
+      <tr>
+        <th>Team Member Name</th>
+        <th>Role</th>
+        <th>Assigned Project</th>
+        <th>Assigned Task</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let member of teamMembers">
+        <td>{{ member.name }}</td>
+        <td>{{ member.role }}</td>
+        <td>{{ member.projectId | projectName: projects }}</td>
+        <td>{{ member.taskId | taskName: tasks }}</td>
+        <td>
+          <!-- Show Assign to Project button only if the member is not assigned to a project -->
+          <button
+            class="btn btn-primary"
+            *ngIf="!member.projectId"
+            (click)="openModal(member, 'project')"
+          >
+            Assign to Project
+          </button>
   
-    <table class="team-members-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Role</th>
-          <th>Assigned To</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let member of teamMembers">
-          <td>{{ member.name }}</td>
-          <td>{{ member.role }}</td>
-          <td>{{ member.assignedTo || 'Not Assigned' }}</td>
-          <td>
-            <button (click)="openEditModal(member)">Edit</button>
-            <button (click)="deleteMember(member.id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+          <!-- Show Assign to Task button only if the member is not assigned to a task -->
+          <button
+            class="btn btn-secondary"
+            *ngIf="!member.taskId"
+            (click)="openModal(member, 'task')"
+          >
+            Assign to Task
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   
-  <!-- Add Member Modal -->
+
+  <!-- Add Team Member Modal -->
   <div class="modal" *ngIf="isAddModalOpen">
     <div class="modal-content">
-      <h3>Add Team Member</h3>
-      <form (ngSubmit)="saveNewMember()" #addForm="ngForm" novalidate>
-        <label>Name</label>
-        <input type="text" [(ngModel)]="newMember.name" name="name" required />
-        <label>Role</label>
-        <input type="text" [(ngModel)]="newMember.role" name="role" required />
-        <label>Assign To</label>
-        <select [(ngModel)]="newMember.assignedTo" name="assignedTo">
-          <option *ngFor="let project of projects" [value]="project.name">{{ project.name }}</option>
-        </select>
-        <button type="submit" [disabled]="addForm.invalid">Save</button>
-        <button type="button" (click)="closeAddModal()">Cancel</button>
+      <h4>Add Team Member</h4>
+      <form (ngSubmit)="saveTeamMember()" #addForm="ngForm" novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" [(ngModel)]="newTeamMember.name" name="name" required class="form-control"/>
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input id="role" [(ngModel)]="newTeamMember.role" name="role" required class="form-control"/>
+        </div>
+
+        <div class="form-actions mt-3">
+          <button type="submit" class="btn btn-success" [disabled]="addForm.invalid">Save</button>
+          <button type="button" class="btn btn-danger" (click)="closeAddModal()">Cancel</button>
+        </div>
       </form>
     </div>
   </div>
-  
-  <!-- Edit Member Modal -->
-  <div class="modal" *ngIf="isEditModalOpen">
+
+  <!-- Assign Modal -->
+  <div class="modal" *ngIf="isModalOpen">
     <div class="modal-content">
-      <h3>Edit Team Member</h3>
-      <form (ngSubmit)="saveEditedMember()" #editForm="ngForm" novalidate>
-        <label>Name</label>
-        <input type="text" [(ngModel)]="selectedMember.name" name="name" required />
-        <label>Role</label>
-        <input type="text" [(ngModel)]="selectedMember.role" name="role" required />
-        <label>Assign To</label>
-        <select [(ngModel)]="selectedMember.assignedTo" name="assignedTo">
-          <option *ngFor="let project of projects" [value]="project.name">{{ project.name }}</option>
-        </select>
-        <button type="submit" [disabled]="editForm.invalid">Save</button>
-        <button type="button" (click)="closeEditModal()">Cancel</button>
-      </form>
+      <h4>Assign {{ selectedMember?.name }}</h4>
+      <p>Select {{ assignTo === 'project' ? 'Project' : 'Task' }}:</p>
+      <select [(ngModel)]="selectedAssignId" class="form-control" required>
+        <option *ngFor="let item of (assignTo === 'project' ? projects : tasks)" [value]="item.id">
+          {{ item.name || item.title }}
+        </option>
+      </select>
+      <div class="mt-3">
+        <button class="btn btn-success" (click)="assignMember()">Assign</button>
+        <button class="btn btn-danger" (click)="closeModal()">Cancel</button>
+      </div>
     </div>
   </div>
-  
+</div>

@@ -9,9 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './features/pages/dashboard/dashboard.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ProjectsComponent } from './features/pages/projects/projects.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TasksComponent } from './features/pages/tasks/tasks.component';
 import { TeamMembersComponent } from './features/pages/team-members/team-members.component';
+import { ProjectNamePipe } from './shared/pipes/project-name.pipe';
+import { ApiInterceptor } from './core/interceptors/api.interceptor';
+import { TaskNamePipe } from './shared/pipes/task-name.pipe';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,8 @@ import { TeamMembersComponent } from './features/pages/team-members/team-members
     ProjectsComponent,
     TasksComponent,
     TeamMembersComponent,
+    ProjectNamePipe,
+    TaskNamePipe,
     ],
   imports: [
     BrowserModule,
@@ -30,7 +35,14 @@ import { TeamMembersComponent } from './features/pages/team-members/team-members
     RouterModule,
     HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  exports: [ProjectNamePipe], // Export to use in other modules
+
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true,
+    },
+  ],  bootstrap: [AppComponent]
 })
 export class AppModule { }

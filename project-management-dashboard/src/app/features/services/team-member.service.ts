@@ -3,30 +3,33 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TeamMemberService {
-  private baseUrl = 'http://localhost:3000';
+  private readonly endpoint = '/teamMembers'; // Relative endpoint
 
   constructor(private http: HttpClient) {}
 
   getTeamMembers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/teamMembers`);
+    return this.http.get<any[]>(this.endpoint);
   }
 
-  addMember(member: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/teamMembers`, member);
+  addTeamMember(member: any): Observable<any> {
+    return this.http.post(this.endpoint, member);
   }
 
-  updateMember(member: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/teamMembers/${member.id}`, member);
+  updateTeamMember(member: any): Observable<any> {
+    return this.http.put(`${this.endpoint}/${member.id}`, member);
   }
 
-  deleteMember(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/teamMembers/${id}`);
+  deleteTeamMember(memberId: number): Observable<any> {
+    return this.http.delete(`${this.endpoint}/${memberId}`);
+  }
+  assignToProject(memberId: number, projectId: number): Observable<any> {
+    return this.http.patch<any>(`${this.endpoint}/${memberId}`, { projectId });
   }
 
-  getProjects(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/projects`);
+  assignToTask(memberId: number, taskId: number): Observable<any> {
+    return this.http.patch<any>(`${this.endpoint}/${memberId}`, { taskId });
   }
 }

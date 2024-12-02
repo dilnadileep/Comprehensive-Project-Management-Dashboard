@@ -13,22 +13,22 @@ export class TasksComponent implements OnInit {
   filteredTasks: any[] = [];
   isModalOpen: boolean = false;
   taskStatuses = ['Pending', 'Completed'];
-
   isEditModalOpen: boolean = false;
   selectedTask: any = {};
-
   sortBy: string = '';
   filterBy: string = '';
   currentTask = { name: '', assignedTo: '', status: '', deadline: '', projectId: null as number | null };  // Fix the type here
   selectedProjectId: number | null = null;  // Store selected project ID
-
-  minDate: string = '';  // This will store the minimum allowed date
+  minDate: string = ''; // This will store the minimum allowed date
 
   constructor(private taskService: TaskService, private projectService: ProjectService) {}
 
   ngOnInit(): void {
     this.loadTasks();
     this.loadProjects();
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0];
+
   }
 
   loadTasks(): void {
@@ -44,14 +44,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  // Method to get project name by projectId
-  getProjectName(projectId: number | null): string {
-    if (projectId) {
-      const project = this.projects.find(p => p.id === projectId);
-      return project ? project.name : 'No project assigned';
-    }
-    return 'No project assigned';
-  }
+
 
   openModal(task: any = null): void {
     // Open the modal for adding a task

@@ -7,12 +7,6 @@
       "deadline": "2024-12-29"
     },
     {
-      "id": "8c88",
-      "name": "Killerbean",
-      "description": "funny",
-      "deadline": "2025-01-05"
-    },
-    {
       "id": "53c3",
       "name": "Ferrero rocher",
       "description": "Good enogh",
@@ -23,25 +17,21 @@
       "name": "Teacherslum",
       "description": "Bad",
       "deadline": "2025-01-05"
+    },
+    {
+      "id": "888b",
+      "name": "VKC",
+      "description": "Slippers",
+      "deadline": "2024-12-18"
+    },
+    {
+      "id": "ac42",
+      "name": "KillerBean",
+      "description": "Nice",
+      "deadline": "2025-01-05"
     }
   ],
   "tasks": [
-    {
-      "id": "984f",
-      "name": "Diary",
-      "assignedTo": "Milk",
-      "status": "Pending",
-      "deadline": "2025-02-01",
-      "projectId": "8c88"
-    },
-    {
-      "id": "646b",
-      "name": "Nice",
-      "assignedTo": "Benny",
-      "status": "Pending",
-      "deadline": "2024-12-14",
-      "projectId": "53c3"
-    },
     {
       "id": "5730",
       "name": "Sofy",
@@ -51,12 +41,52 @@
       "projectId": "7b79"
     },
     {
-      "id": "7cb1",
-      "name": "Caloritracker",
-      "assignedTo": "Rony",
+      "id": "b112",
+      "name": "a",
+      "assignedTo": "Ab",
       "status": "Completed",
-      "deadline": "2025-01-03",
-      "projectId": "8c88"
+      "deadline": "2024-12-28",
+      "projectId": "ded7"
+    },
+    {
+      "id": "84e1",
+      "name": "B Nake",
+      "assignedTo": "CD",
+      "status": "Completed",
+      "deadline": "2024-12-27",
+      "projectId": "53c3"
+    },
+    {
+      "id": "7528",
+      "name": "Do Chaos",
+      "assignedTo": "Dain",
+      "status": "Completed",
+      "deadline": "2024-12-03",
+      "projectId": "888b"
+    },
+    {
+      "id": "f19e",
+      "name": "Bare wood",
+      "assignedTo": "Mariya",
+      "status": "Completed",
+      "deadline": "2024-12-03",
+      "projectId": "888b"
+    },
+    {
+      "id": "e3cc",
+      "name": "Skane ",
+      "assignedTo": "Dykk",
+      "status": "Completed",
+      "deadline": "2024-12-12",
+      "projectId": "7b79"
+    },
+    {
+      "id": "ac1c",
+      "name": "base wake",
+      "assignedTo": "Freddy",
+      "status": "Completed",
+      "deadline": "2024-12-28",
+      "projectId": "53c3"
     }
   ],
   "teamMembers": [
@@ -72,13 +102,26 @@
       "name": "DILNA DILEEP",
       "role": "Designer",
       "projectId": "",
-      "taskId": "646b"
+      "taskId": null
     },
     {
       "id": "1c1c",
       "name": "Dev p",
       "role": "Hr",
       "projectId": "53c3"
+    },
+    {
+      "id": "6f55",
+      "name": "Teena ",
+      "role": "Designer",
+      "projectId": "53c3"
+    },
+    {
+      "id": "5a77",
+      "name": "Dane kake",
+      "role": "Snippet",
+      "projectId": "ac42",
+      "taskId": "f19e"
     }
   ]
 }

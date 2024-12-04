@@ -1,156 +1,104 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-
-<div class="main-layout">
-  
-  <div id="content">
-     <div id="myCarousel" class="carousel slide banner_main" data-ride="carousel">
-        
-        <div class="carousel-inner">
-           <div class="carousel-item active">
-              <div class="container-fluid">
-                 <div class="carousel-caption">
-                    <div class="row">
-                       <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
-                          <div class="text-bg">
-                             <h1>Plan<br> Strategize <br>Execute</h1>
-                             <p>Streamline your software development process with our powerful project management tools. Collaborate, track progress, and deliver exceptional results with ease.</p>
-                             <a class="read_more" routerLink="/projects" routerLinkActive="active">Get started</a>
-                         </div>                             
-                       </div>
-                       <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12">
-                          <div class="images_box">
-                             <figure><img src="./images/img2.png"></figure>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-           </div>
-           
-           
-        </div>
-        
+<div class="main-container">
+   <div class="content">
+     <div class="text-section">
+       <h1>Plan<br />Strategize<br />Execute</h1>
+       <p>
+         Streamline your software development process with our powerful project
+         management tools. Collaborate, track progress, and deliver exceptional
+         results with ease.
+       </p>
+       <button class="get-started-btn"  routerLink="/projects" routerLinkActive="active">Get started</button>
      </div>
-     <!-- end banner -->
-     <!-- about -->
-     <div id="about"  class="about">
-        <div class="container-fluid">
-           <div class="row d_flex">
-              <div class="col-md-5">
-                 <div class="about_img">
-                    <figure><img src="images/about_img.jpg" alt="#"/></figure>
-                 </div>
-              </div>
-              <div class="col-md-7">
-                 <div class="titlepage">
-                    <h2>About <span class="blu"><b>Project Pilot</b></span></h2>
-                    <p>Project Pilot is an innovative project management tool designed to empower software teams. From planning and task management to real-time collaboration and progress tracking, Project Pilot helps you stay organized and deliver projects on time. Simplify your workflows and achieve your goals with our intuitive platform.</p>
-                    <a class="read_more" href="#">Learn More</a>
-                </div>                    
-              </div>
-           </div>
-        </div>
+     <div class="image-section">
+      <img src="assets/images/img2.png" alt="Project Management" />
+   </div>
+   </div>
+ </div>
+ <section class="about-section">
+   <div class="container">
+     <div class="row">
+       <!-- Image Section -->
+       <div class="col image-content">
+         <img src="assets/images/about_img.jpg" alt="About Project Pilot" />
+       </div>
+       <!-- Text Section -->
+       <div class="col text-content">
+         <h2>
+           About <span>Project Pilot</span>
+         </h2>
+         <p>
+           Project Pilot is an innovative project management tool designed to empower software teams.
+           From planning and task management to real-time collaboration and progress tracking, Project
+           Pilot helps you stay organized and deliver projects on time. Simplify your workflows and
+           achieve your goals with our intuitive platform.
+         </p>
+         <button class="learn-more-btn">Learn More</button>
+       </div>
      </div>
-     <!-- end about -->
-     <div id="about"  class="about">
-      <div class="container-fluid">
-        <div class="chart-container">
-          <h2>Tasks Completed per Project</h2>
-          <div #chart></div>
-        </div>
+   </div>
+ </section>
+ 
+ <!-- bar chart  -->
+ <section class="chart-section">
+   <div class="container">
+     <div class="row">
+         <div class="col image-content">
+            <div class="chart-container">
+               <h2>Tasks Completed per Project</h2>
+               <div #chart></div>
+            </div>
+         </div>
       </div>
    </div>
-     <!-- work -->
-     <div id="work"  class="work">
-        <div class="container-fluid">
-           <div class="row d_flex">
-              <div class="col-md-7">
-              <div class="titlepage">
-                    <h2>How It <span class="blu">Works</span></h2>
-                    <p>Manage your software projects seamlessly in just a few steps. Create tasks, assign them to team members, set deadlines, and track progress all in one place. Simplify workflows and stay on top of your projects with real-time collaboration tools.</p>
-                    <a class="read_more" href="#">Discover More</a>
-              </div>                    
-              </div>
-              <div class="col-md-5">
-                 <div class="work_img">
-                    <figure><img src="/images/work_img.jpg" alt="#"/></figure>
-                 </div>
-              </div>
-           </div>
-        </div>
+</section>
+ 
+
+ 
+ <div class="footer-section">
+   <div class="container">
+     <div class="row">
+       <!-- Address Section -->
+       <div class="col address-section">
+         <h3>Address</h3>
+         <p><strong>Beinex - India</strong></p>
+         <p>
+           Beinex Consulting Pvt Ltd, #23, TBC-II,<br />
+           8th Floor, Vismaya, Infopark - Phase 1,<br />
+           Kakkanad, Kochi, PIN - 682042, India
+         </p>
+         <p>
+           <strong>Office:</strong> +91 484 4855800<br />
+           <strong>Mobile:</strong> +91 85905 20071<br />
+           <strong>Email:</strong> info&#64;beinex.com
+         </p>
+       </div>
+ 
+       <!-- Follow Us Section -->
+       <div class="col follow-us-section">
+         <h3>Follow Us</h3>
+         <ul>
+           <li><i class="fab fa-facebook"></i> Facebook</li>
+           <li><i class="fab fa-twitter"></i> Twitter</li>
+           <li><i class="fab fa-linkedin"></i> Linkedin</li>
+           <li><i class="fab fa-youtube"></i> Youtube</li>
+           <li><i class="fab fa-instagram"></i> Instagram</li>
+         </ul>
+       </div>
+ 
+       <!-- Newsletter Section -->
+       <div class="col newsletter-section">
+         <h3>Newsletter</h3>
+         <form>
+           <input type="email" placeholder="Enter Your Email" required />
+           <button type="submit">Subscribe</button>
+         </form>
+       </div>
      </div>
-     <!-- end work -->
-     
-     <!--  footer -->
-     <footer>
-        <div class="footer">
-           <div class="container">
-              <div class="row">
-                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="row">
-                       <div class="col-md-8 col-sm-6">
-                          <div class="address">
-                             <h3>Address</h3>
-                          </div>
-                          <ul class="location_icon">
-                             <li>
-                                <strong>Beinex – India</strong><br>
-                                Beinex Consulting Pvt Ltd,
-                                #23, TBC-II,<br> 8th Floor, Vismaya,
-                                Infopark - Phase 1, Kakkanad,
-                                Kochi, PIN - 682042, India<br>
-                                Office: +91 484 4855800<br>
-                                Mobile: +91 85905 20071<br>
-                                Email: Infobeinex.com<br><br>
-                             </li>
-                          </ul>
-                    </div>                          
-                       
-                    </div>
-                 </div>
-                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="row">
-                       <div class="col-md-5 col-sm-6">
-                          <div class="address">
-                             <h3>Follow Us</h3>
-                          </div>
-                          <ul class="social_icon">
-                             <li><a href="#">Facebook <i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                             <li><a href="#"> Twitter<i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                             <li><a href="#"> Linkedin<i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-                             <li><a href="#"> Youtube<i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-                             <li><a href="#"> Instagram<i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                          </ul>
-                       </div>
-                       <div class="col-md-7 col-sm-6">
-                          <div class="address">
-                             <h3>Newsletter </h3>
-                          </div>
-                          <form class="bottom_form">
-                             <input class="enter" placeholder="Enter Your Email" type="text" name="Enter Your Email">
-                             <button class="sub_btn">subscribe</button>
-                          </form>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-           </div>
-           <div class="copyright">
-              <div class="container">
-                 <div class="row">
-                    <div class="col-md-12">
-                       <p>Copyright 2024 All Right Reserved By ProjectPilot</p>
-                    </div>
-                 </div>
-              </div>
-           </div>
-        </div>
-     </footer>
-  </div>
+   </div>
 
 </div>
+ 
+    <!-- Footer Bottom -->
+    <footer class="footer-bottom">
+      <p>Copyright 2024 All Right Reserved By ProjectPilot</p>
+    </footer>

@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
     const completedTasksByProject = this.getCompletedTasksByProject();
 
     // Chart dimensions and margins
-    const margin = { top: 20, right: 30, bottom: 40, left: 50 };
+    const margin = { top: 20, right: 30, bottom:60, left: 50 };
     const width = 800 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 

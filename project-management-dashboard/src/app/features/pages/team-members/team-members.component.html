@@ -28,7 +28,7 @@
         <td>
           <!-- Show Assign to Project button only if the member is not assigned to a project -->
           <button
-            class="btn btn-primary"
+            class="btn btn-secondary"
             *ngIf="!member.projectId"
             (click)="openModal(member, 'project')"
           >
@@ -36,7 +36,7 @@
           </button>&nbsp;
           <!-- Show Assign to Task button only if the member is not assigned to a task -->
           <button
-            class="btn btn-primary"
+            class="btn btn-secondary"
             *ngIf="!member.taskId"
             (click)="openModal(member, 'task')"
           >

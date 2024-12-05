@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 @Component({
   selector: 'app-projects', 
@@ -24,7 +25,11 @@ export class ProjectsComponent implements OnInit {
       this.projects = data;
     });
   }
-
+  loadProjects(): void {
+    this.projectService.getProjects().subscribe((data) => {
+      this.projects = data;  // Store projects
+    });
+  }
   openModal(): void {
     // Opens the modal for adding a new project
     this.isModalOpen = true;
@@ -45,10 +50,23 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+
   deleteProject(id: number): void {
-    // Deletes a project and updates the list
-    this.projectService.deleteProject(id).subscribe(() => {
-      this.projects = this.projects.filter((project) => project.id !== id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete this project?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.projectService.deleteProject(id).subscribe(() => {
+          this.loadProjects();
+          Swal.fire('Deleted!', 'Your project has been deleted.', 'success');
+        });
+      }
     });
   }
 }

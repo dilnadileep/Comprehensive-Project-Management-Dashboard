@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { ProjectService } from '../../services/project.service';  // Import your project service
+import Swal from 'sweetalert2'; // Import SweetAlert2
+import { TeamMemberService } from '../../services/team-member.service';
 
 @Component({
   selector: 'app-tasks',
@@ -10,6 +12,7 @@ import { ProjectService } from '../../services/project.service';  // Import your
 export class TasksComponent implements OnInit {
   tasks: any[] = [];
   projects: any[] = [];  // Hold the list of projects
+  teamMembers: any[] = [];
   filteredTasks: any[] = [];
   isModalOpen: boolean = false;
   taskStatuses = ['Pending', 'Completed'];
@@ -21,11 +24,16 @@ export class TasksComponent implements OnInit {
   selectedProjectId: number | null = null;  // Store selected project ID
   minDate: string = ''; // This will store the minimum allowed date
 
-  constructor(private taskService: TaskService, private projectService: ProjectService) {}
+  constructor(
+    private taskService: TaskService,
+    private projectService: ProjectService,
+    private teamMemberService: TeamMemberService
+  ) {}
 
   ngOnInit(): void {
     this.loadTasks();
     this.loadProjects();
+    this.loadTeamMembers();
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
 
@@ -43,7 +51,11 @@ export class TasksComponent implements OnInit {
       this.projects = data;  // Store projects
     });
   }
-
+  loadTeamMembers(): void {
+    this.teamMemberService.getTeamMembers().subscribe((data) => {
+      this.teamMembers = data;
+    });
+  }
 
 
   openModal(task: any = null): void {
@@ -67,11 +79,10 @@ export class TasksComponent implements OnInit {
   }
 
   openEditModal(task: any): void {
-    // Open the edit modal and pre-fill the selected task details
-    this.selectedTask = { ...task };  // Clone task object for editing
-    this.selectedProjectId = task.projectId;  // Set selected project ID for editing
+    this.selectedTask = { ...task }; // Clone task object for editing
     this.isEditModalOpen = true;
   }
+  
 
   closeEditModal(): void {
     // Close the edit modal
@@ -79,30 +90,41 @@ export class TasksComponent implements OnInit {
   }
 
   editTask(): void {
-    // Update task with new projectId if changed
-    this.selectedTask.projectId = this.selectedProjectId;
     this.taskService.updateTask(this.selectedTask).subscribe(
       (updatedTask) => {
         const index = this.tasks.findIndex((t) => t.id === updatedTask.id);
         if (index > -1) {
           this.tasks[index] = updatedTask;
         }
-        this.closeEditModal();  // Close edit modal after updating
+        this.closeEditModal(); // Close edit modal after updating
       },
       (error) => {
         console.error('Error updating task:', error);
       }
     );
   }
+  
+
 
   deleteTask(id: number): void {
-    if (confirm('Are you sure you want to delete this task?')) {
-      this.taskService.deleteTask(id).subscribe(() => {
-        this.loadTasks();
-      });
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete this task?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.taskService.deleteTask(id).subscribe(() => {
+          this.loadTasks();
+          Swal.fire('Deleted!', 'Your task has been deleted.', 'success');
+        });
+      }
+    });
   }
-
+  
   filterTasks(): void {
     this.filteredTasks = this.filterBy
       ? this.tasks.filter((task) => task.status === this.filterBy)
@@ -114,6 +136,11 @@ export class TasksComponent implements OnInit {
       const deadlineA = new Date(a.deadline).getTime();
       const deadlineB = new Date(b.deadline).getTime();
       return deadlineA - deadlineB;
+    });
+  }
+  assignTeamMemberToTask(taskId: number, memberId: number): void {
+    this.taskService.assignTeamMemberToTask(taskId, memberId).subscribe(() => {
+      this.loadTasks();
     });
   }
 }

@@ -15,6 +15,7 @@ import { TeamMembersComponent } from './features/pages/team-members/team-members
 import { ProjectNamePipe } from './shared/pipes/project-name.pipe';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { TaskNamePipe } from './shared/pipes/task-name.pipe';
+import { TeamMemberNamePipe } from './shared/pipes/team-member-name.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TaskNamePipe } from './shared/pipes/task-name.pipe';
     TeamMembersComponent,
     ProjectNamePipe,
     TaskNamePipe,
+    TeamMemberNamePipe,
     ],
   imports: [
     BrowserModule,

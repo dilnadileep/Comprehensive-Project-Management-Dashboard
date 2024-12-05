@@ -1,19 +1,26 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <div class="container">
     <header class="page-header">
-      <h2>Task List</h2>
-      <p>Manage your tasks effectively by filtering, sorting, and updating the list.</p>
+      <h2 class="header-title">Task List</h2>
+      <p class="page-subtitle">Manage your tasks effectively by filtering, sorting, and updating the list.</p>
       <button (click)="openModal()" class="btn btn-primary">+ Add Task</button>
     </header>
   
     <div class="filters">
-      <select [(ngModel)]="filterBy" (change)="filterTasks()" class="filter-dropdown">
-        <option value="">Filter by Status</option>
-        <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
-      </select>
-      <button (click)="sortByDeadline()" class="btn btn-primary">Sort by Deadline</button>
+      <div class="filters-left">
+        <select [(ngModel)]="filterBy" (change)="filterTasks()" class="btn btn-primary">
+          <option value="">Filter by Status</option>
+          <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
+        </select>
+      </div>
+      <div class="filters-right">
+        <button (click)="sortByDeadline()" class="btn btn-primary">Sort by Deadline</button>
+      </div>
     </div>
+    
   
-    <table *ngIf="filteredTasks.length > 0" class="table">
+    <table *ngIf="filteredTasks.length > 0" class="custom-table">
       <thead>
         <tr>
           <th>Task Name</th>
@@ -27,224 +34,247 @@
       <tbody>
         <tr *ngFor="let task of filteredTasks">
           <td>{{ task.name }}</td>
-          <td>{{ task.assignedTo }}</td>
+          <td>{{ task.assignedTo | teamMemberName: teamMembers }}</td>
           <td>{{ task.status }}</td>
           <td>{{ task.deadline }}</td>
           <td>{{ task.projectId | projectName:projects }}</td> <!-- pipe -->
           <td>
-            <button (click)="openEditModal(task)" class="btn btn-warning">Edit</button>&nbsp;&nbsp;&nbsp;
-            <button (click)="deleteTask(task.id)" class="btn btn-danger">Delete</button>
+            <img 
+            src="https://cdn-icons-png.flaticon.com/512/1827/1827933.png" 
+            alt="Edit" 
+            class="edit-icon" 
+            (click)="openEditModal(task)"> 
+            &nbsp;&nbsp;&nbsp;
+            <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="Delete Icon" title="Delete Task" class="delete-icon" (click)="deleteTask(task.id)" />
           </td>
         </tr>
       </tbody>
     </table>
     
-    
     <p *ngIf="filteredTasks.length === 0" class="no-tasks">No tasks found.</p>
   
-    <!-- Modal -->
+    <!-- Add Task Modal -->
     <div class="modal" *ngIf="isModalOpen">
-      <div class="modal-content">
-        <h4 align="center">Add Task</h4>
-        <form (ngSubmit)="saveTask()" #taskForm="ngForm" novalidate>
-          <!-- Task Name Field -->
-          <div class="form-group">
-            <label for="name">Task Name</label>
-            <input
-              id="name"
-              [(ngModel)]="currentTask.name"
-              name="name"
-              required
-              class="form-control"
-              #name="ngModel"
-              [class.is-invalid]="name.invalid && name.touched"
-            />
-            <div *ngIf="name.invalid && name.touched" class="text-danger">
-              Task Name is required.
-            </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Task</h5>
+            <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
           </div>
-    
-          <!-- Assigned To Field -->
-          <div class="form-group">
-            <label for="assignedTo">Assigned To</label>
-            <input
-              id="assignedTo"
-              [(ngModel)]="currentTask.assignedTo"
-              name="assignedTo"
-              required
-              class="form-control"
-              #assignedTo="ngModel"
-              [class.is-invalid]="assignedTo.invalid && assignedTo.touched"
-            />
-            <div *ngIf="assignedTo.invalid && assignedTo.touched" class="text-danger">
-              Assigned To is required.
-            </div>
-          </div>
-    
-          <!-- Status Field -->
-          <div class="form-group">
-            <label for="status">Status</label>
-            <select
-              id="status"
-              [(ngModel)]="currentTask.status"
-              name="status"
-              required
-              class="form-control"
-              #status="ngModel"
-              [class.is-invalid]="status.invalid && status.touched"
-            >
-              <option value="" disabled>Select Status</option>
-              <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
-            </select>
-            <div *ngIf="status.invalid && status.touched" class="text-danger">
-              Status is required.
-            </div>
-          </div>
-    
-          <!-- Deadline Field -->
-          <div class="form-group">
-            <label for="deadline">Deadline</label>
-            <input
-              id="deadline"
-              type="date"
-              [(ngModel)]="currentTask.deadline"
-              name="deadline"
-              required
-              class="form-control"
-              [attr.min]="minDate"
-              #deadline="ngModel"
-              [class.is-invalid]="deadline.invalid && deadline.touched"
-            />
-            <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
-              Deadline is required.
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="project">Project</label>
-            <select id="project" [(ngModel)]="selectedProjectId" name="project" required class="form-control">
-              <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
-            </select>
-          </div>
-          
-          
-          <!-- Form Actions -->
-          <div class="form-actions mt-3">
-            <button type="submit" class="submitbtn" [disabled]="taskForm.invalid">Save</button>
-            <button type="button" (click)="closeModal()" class="cancelbtn">Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-        <!-- edit Modal -->
-
-        <div class="modal" *ngIf="isEditModalOpen">
-          <div class="modal-content">
-            <h4>Edit Task</h4>
-            <form (ngSubmit)="editTask()" #editForm="ngForm" novalidate>
+          <div class="modal-body">
+            <form (ngSubmit)="saveTask()" #taskForm="ngForm" novalidate>
               <!-- Task Name Field -->
-              <div class="form-group">
-                <label for="taskName">Task Name</label>
+              <div class="form-outline mb-4">
+                <label for="name" class="form-label">Task Name</label>
                 <input
-                  id="taskName"
-                  [(ngModel)]="selectedTask.name"
+                  id="name"
+                  [(ngModel)]
+                  ="currentTask.name"
                   name="name"
                   required
-                  #name="ngModel"
                   class="form-control"
+                  #name="ngModel"
                   [class.is-invalid]="name.invalid && name.touched"
                 />
                 <div *ngIf="name.invalid && name.touched" class="text-danger">
                   Task Name is required.
                 </div>
               </div>
-        
+    
               <!-- Assigned To Field -->
-              <div class="form-group">
-                <label for="assignedTo">Assigned To</label>
-                <input
+              <div class="form-outline mb-4">
+                <label for="assignedTo" class="form-label">Assigned To</label>
+                <select
                   id="assignedTo"
-                  [(ngModel)]="selectedTask.assignedTo"
+                  [(ngModel)]="currentTask.assignedTo"
                   name="assignedTo"
                   required
-                  #assignedTo="ngModel"
                   class="form-control"
+                  #assignedTo="ngModel"
                   [class.is-invalid]="assignedTo.invalid && assignedTo.touched"
-                />
+                >
+                  <option value="" disabled>Select Team Member</option>
+                  <option *ngFor="let member of teamMembers" [value]="member.id">{{ member.name }}</option>
+                </select>
                 <div *ngIf="assignedTo.invalid && assignedTo.touched" class="text-danger">
                   Assigned To is required.
                 </div>
               </div>
-        
+    
               <!-- Status Field -->
-              <div class="form-group">
-                <label for="status">Status</label>
+              <div class="form-outline mb-4">
+                <label for="status" class="form-label">Status</label>
                 <select
                   id="status"
-                  [(ngModel)]="selectedTask.status"
+                  [(ngModel)]="currentTask.status"
                   name="status"
                   required
-                  #status="ngModel"
                   class="form-control"
+                  #status="ngModel"
                   [class.is-invalid]="status.invalid && status.touched"
                 >
                   <option value="" disabled>Select Status</option>
-                  <option value="Pending">Pending</option>
-                  <option value="Completed">Completed</option>
+                  <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
                 </select>
                 <div *ngIf="status.invalid && status.touched" class="text-danger">
                   Status is required.
                 </div>
               </div>
-        
+    
               <!-- Deadline Field -->
-              <div class="form-group">
-                <label for="deadline">Deadline</label>
+              <div class="form-outline mb-4">
+                <label for="deadline" class="form-label">Deadline</label>
                 <input
                   id="deadline"
                   type="date"
-                  [(ngModel)]="selectedTask.deadline"
+                  [(ngModel)]="currentTask.deadline"
                   name="deadline"
                   required
-                  #deadline="ngModel"
                   class="form-control"
                   [attr.min]="minDate"
+                  #deadline="ngModel"
                   [class.is-invalid]="deadline.invalid && deadline.touched"
                 />
                 <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
                   Deadline is required.
                 </div>
               </div>
-        
-              <!-- Project Field: Associating Task with Project -->
-              <div class="form-group">
-                <label for="projectId">Project</label>
-                <select
-                  id="projectId"
-                  [(ngModel)]="selectedTask.projectId"
-                  name="projectId"
-                  required
-                  #projectId="ngModel"
-                  class="form-control"
-                  [class.is-invalid]="projectId.invalid && projectId.touched"
-                >
-                  <option value="" disabled>Select Project</option>
+    
+              <!-- Project Field -->
+              <div class="form-outline mb-4">
+                <label for="project" class="form-label">Project</label>
+                <select id="project" [(ngModel)]="selectedProjectId" name="project" required class="form-control">
                   <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
                 </select>
-                <div *ngIf="projectId.invalid && projectId.touched" class="text-danger">
-                  Project is required.
-                </div>
               </div>
-        
-              <!-- Form Buttons -->
+    
+              <!-- Form Actions -->
               <div class="form-actions mt-3">
-                <button type="submit" class="submitbtn" [disabled]="editForm.invalid">Save Changes</button>
-                <button type="button" class="cancelbtn" (click)="closeEditModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Save</button>
+                <button type="button" (click)="closeModal()" class="btn btn-secondary">Cancel</button>
               </div>
             </form>
           </div>
         </div>
-        
-    
+      </div>
+    </div>
+
+<!-- Edit Task Modal -->
+<div class="modal" *ngIf="isEditModalOpen">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Task</h5>
+        <button type="button" class="btn-close" (click)="closeEditModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="editTask()" #editForm="ngForm" novalidate>
+          <!-- Task Name Field -->
+          <div class="form-outline mb-4">
+            <label for="taskName" class="form-label">Task Name</label>
+            <input
+              id="taskName"
+              [(ngModel)]="selectedTask.name"
+              name="name"
+              required
+              #name="ngModel"
+              class="form-control"
+              [class.is-invalid]="name.invalid && name.touched"
+            />
+            <div *ngIf="name.invalid && name.touched" class="text-danger">
+              Task Name is required.
+            </div>
+          </div>
+
+          <!-- Assigned To Field -->
+          <div class="form-outline mb-4">
+            <label for="assignedTo" class="form-label">Assigned To</label>
+            <select
+              id="assignedTo"
+              [(ngModel)]="selectedTask.assignedTo"
+              name="assignedTo"
+              required
+              #assignedTo="ngModel"
+              class="form-control"
+              [class.is-invalid]="assignedTo.invalid && assignedTo.touched"
+            >
+              <option value="" disabled>Select Team Member</option>
+              <option *ngFor="let member of teamMembers" [value]="member.id">{{ member.name }}</option>
+            </select>
+            <div *ngIf="assignedTo.invalid && assignedTo.touched" class="text-danger">
+              Assigned To is required.
+            </div>
+          </div>
+
+          <!-- Status Field -->
+          <div class="form-outline mb-4">
+            <label for="status" class="form-label">Status</label>
+            <select
+              id="status"
+              [(ngModel)]="selectedTask.status"
+              name="status"
+              required
+              #status="ngModel"
+              class="form-control"
+              [class.is-invalid]="status.invalid && status.touched"
+            >
+              <option value="" disabled>Select Status</option>
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+            </select>
+            <div *ngIf="status.invalid && status.touched" class="text-danger">
+              Status is required.
+            </div>
+          </div>
+
+          <!-- Deadline Field -->
+          <div class="form-outline mb-4">
+            <label for="deadline" class="form-label">Deadline</label>
+            <input
+              id="deadline"
+              type="date"
+              [(ngModel)]="selectedTask.deadline"
+              name="deadline"
+              required
+              #deadline="ngModel"
+              class="form-control"
+              [attr.min]="minDate"
+              [class.is-invalid]="deadline.invalid && deadline.touched"
+            />
+            <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
+              Deadline is required.
+            </div>
+          </div>
+
+          <!-- Project Field -->
+          <div class="form-outline mb-4">
+            <label for="projectId" class="form-label">Project</label>
+            <select
+              id="projectId"
+              [(ngModel)]="selectedTask.projectId"
+              name="projectId"
+              required
+              #projectId="ngModel"
+              class="form-control"
+              [class.is-invalid]="projectId.invalid && projectId.touched"
+            >
+              <option value="" disabled>Select Project</option>
+              <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+            </select>
+            <div *ngIf="projectId.invalid && projectId.touched" class="text-danger">
+              Project is required.
+            </div>
+          </div>
+
+          <!-- Form Buttons -->
+          <div class="form-actions mt-3">
+            <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid">Save Changes</button>
+            <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
+</div>
   
+</div>

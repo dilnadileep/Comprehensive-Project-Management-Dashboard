@@ -1,15 +1,16 @@
 <div class="container">
+  <!-- Page Header -->
   <header class="page-header">
-    <h2>Manage Your Projects</h2>
+    <h2 class="header-title">Manage Your Projects</h2>
     <p class="page-subtitle">
       Organize, track, and complete your projects with ease. Add new projects, set deadlines, and monitor progress all in one place.
     </p>
-    <button (click)="openModal()" class="btn btn-primary">+ Add Project</button>
+    <button (click)="openModal()" class="btn btn-primary add-project-btn">+ Add Project</button>
   </header>
 
   <!-- Projects Table -->
   <section class="projects-section">
-    <table *ngIf="projects.length > 0" class="table">
+    <table *ngIf="projects.length > 0" class="table custom-table">
       <thead>
         <tr>
           <th>Name</th>
@@ -24,7 +25,12 @@
           <td>{{ project.description }}</td>
           <td>{{ project.deadline }}</td>
           <td>
-            <button (click)="deleteProject(project.id)" class="btn btn-danger">Delete</button>
+            <img 
+              src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" 
+              alt="Delete Icon" 
+              title="Delete Task" 
+              class="delete-icon" 
+              (click)="deleteProject(project.id)" />
           </td>
         </tr>
       </tbody>
@@ -32,65 +38,83 @@
     <p *ngIf="projects.length === 0" class="no-projects">No projects found. Add a new project to get started.</p>
   </section>
 
+
   <!-- Modal -->
-  <div class="modal" *ngIf="isModalOpen">
-    <div class="modal-content">
-      <h4 align="center">Add New Project</h4>
-      <form (ngSubmit)="addProject()" #projectForm="ngForm" novalidate>
-        <div class="form-group">
-          <label for="name">Project Name</label>
-          <input
-            id="name"
-            [(ngModel)]="newProject.name"
-            name="name"
-            required
-            #name="ngModel"
-            class="form-control"
-            [class.is-invalid]="name.invalid && name.touched"
-          />
-          <div *ngIf="name.invalid && name.touched" class="text-danger">
-            Project name is required.
+<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" *ngIf="isModalOpen">
+  <div class="modal-dialog d-flex justify-content-center">
+    <div class="modal-content w-75">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add New Project</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" data-mdb-button-init data-mdb-ripple-init></button>
+      </div>
+      
+      <!-- Modal Body -->
+      <div class="modal-body p-4">
+        <form (ngSubmit)="addProject()" #projectForm="ngForm" novalidate>
+          <!-- Name input -->
+          <div class="form-outline mb-4" data-mdb-input-init>
+            <label class="form-label" for="name">Project Name</label>
+            <input
+              type="text"
+              id="name"
+              [(ngModel)]="newProject.name"
+              name="name"
+              required
+              #name="ngModel"
+              class="form-control"
+              [class.is-invalid]="name.invalid && name.touched"
+            />
+            <div *ngIf="name.invalid && name.touched" class="text-danger">
+              Project name is required.
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea
-            id="description"
-            [(ngModel)]="newProject.description"
-            name="description"
-            required
-            #description="ngModel"
-            class="form-control"
-            [class.is-invalid]="description.invalid && description.touched"
-          ></textarea>
-          <div *ngIf="description.invalid && description.touched" class="text-danger">
-            Description is required.
+
+          <!-- Description input -->
+          <div class="form-outline mb-4" data-mdb-input-init>
+            <label class="form-label" for="description">Description</label>
+            <textarea
+              id="description"
+              [(ngModel)]="newProject.description"
+              name="description"
+              required
+              #description="ngModel"
+              class="form-control"
+              [class.is-invalid]="description.invalid && description.touched"
+            ></textarea>
+            <div *ngIf="description.invalid && description.touched" class="text-danger">
+              Description is required.
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="deadline">Deadline</label>
-          <input
-          id="deadline"
-          type="date"
-          [(ngModel)]="newProject.deadline"
-          name="deadline"
-          required
-          #deadline="ngModel"
-          class="form-control"
-          [class.is-invalid]="deadline.invalid && deadline.touched"
-          [attr.min]="minDate"
-        />
-        
-          <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
-            Deadline is required.
+
+          <!-- Deadline input -->
+          <div class="form-outline mb-4" data-mdb-input-init>
+            <label class="form-label" for="deadline">Deadline</label>
+            <input
+              id="deadline"
+              type="date"
+              [(ngModel)]="newProject.deadline"
+              name="deadline"
+              required
+              #deadline="ngModel"
+              class="form-control"
+              [class.is-invalid]="deadline.invalid && deadline.touched"
+              [attr.min]="minDate"
+            />
+            <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
+              Deadline is required.
+            </div>
           </div>
-        </div><br>
-        <div class="form-actions">
-          <button type="submit" class="submitbtn" [disabled]="projectForm.invalid">Save</button>
-          <button type="button" (click)="closeModal()" class="cancelbtn">Cancel</button>
-        </div>
-      </form>
+
+          <!-- Form Actions -->
+          <div class="form-actions d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Save</button>
+            <button type="button" (click)="closeModal()" class="btn btn-secondary" data-mdb-dismiss="modal" aria-label="Close">Cancel</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-  
+</div>
+
 </div>

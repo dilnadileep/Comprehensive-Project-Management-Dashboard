@@ -25,4 +25,8 @@ export class TaskService {
   deleteTask(taskId: number): Observable<any> {
     return this.http.delete(`${this.endpoint}/${taskId}`);
   }
+  assignTeamMemberToTask(taskId: number, teamMemberId: number): Observable<any> {
+    return this.http.patch<any>(`${this.endpoint}/${taskId}`, { assignedTo: teamMemberId });
+  }
+  
 }

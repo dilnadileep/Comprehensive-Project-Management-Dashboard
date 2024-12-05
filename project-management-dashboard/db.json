@@ -1,158 +1,59 @@
 {
   "projects": [
     {
-      "id": "7b79",
+      "id": "39c6",
       "name": "Outfitter",
-      "description": "good",
-      "deadline": "2024-12-29"
+      "description": "Online Tailoring Shop",
+      "deadline": "2024-12-22"
     },
     {
-      "id": "53c3",
-      "name": "Ferrero rocher",
-      "description": "Good enogh",
-      "deadline": "2024-12-29"
+      "id": "5a0a",
+      "name": "Calory Tracker",
+      "description": "Fitness App",
+      "deadline": "2024-12-26"
     },
     {
-      "id": "888b",
-      "name": "VKC",
-      "description": "Slippers",
-      "deadline": "2024-12-18"
-    },
-    {
-      "id": "ac42",
-      "name": "KillerBean",
-      "description": "Nice",
-      "deadline": "2025-01-05"
-    },
-    {
-      "id": "2a46",
-      "name": "Dake gok",
-      "description": "Dane is fune vide sowo",
+      "id": "c54f",
+      "name": "Ave inre ",
+      "description": "due new ui",
       "deadline": "2024-12-28"
     }
   ],
   "tasks": [
     {
-      "id": "5730",
-      "name": "Sofy",
-      "assignedTo": "Mariya",
+      "id": "5cf8",
+      "name": "Crew pap",
+      "assignedTo": "dddc",
       "status": "Completed",
-      "deadline": "2024-12-04",
-      "projectId": "7b79"
+      "deadline": "2025-01-04",
+      "projectId": "5a0a"
     },
     {
-      "id": "b112",
-      "name": "a",
-      "assignedTo": "Ab",
-      "status": "Completed",
+      "id": "9950",
+      "name": "nune dvoe",
+      "assignedTo": "dddc",
+      "status": "Pending",
       "deadline": "2024-12-28",
-      "projectId": null
-    },
-    {
-      "id": "84e1",
-      "name": "B Nake",
-      "assignedTo": "CD",
-      "status": "Completed",
-      "deadline": "2024-12-27",
-      "projectId": "53c3"
-    },
-    {
-      "id": "7528",
-      "name": "Do Chaos",
-      "assignedTo": "Dain",
-      "status": "Completed",
-      "deadline": "2024-12-03",
-      "projectId": "888b"
-    },
-    {
-      "id": "f19e",
-      "name": "Bare wood",
-      "assignedTo": "Mariya",
-      "status": "Completed",
-      "deadline": "2024-12-03",
-      "projectId": "888b"
-    },
-    {
-      "id": "e3cc",
-      "name": "Skane ",
-      "assignedTo": "Dykk",
-      "status": "Completed",
-      "deadline": "2024-12-12",
-      "projectId": "7b79"
-    },
-    {
-      "id": "ac1c",
-      "name": "base wake",
-      "assignedTo": "Freddy",
-      "status": "Completed",
-      "deadline": "2024-12-28",
-      "projectId": "53c3"
-    },
-    {
-      "id": "7814",
-      "name": "zane odme ",
-      "assignedTo": "fnale smane ",
-      "status": "Completed",
-      "deadline": "2025-01-05",
-      "projectId": "2a46"
-    },
-    {
-      "id": "2435",
-      "name": "guna dake ",
-      "assignedTo": "gniue wow slee",
-      "status": "Completed",
-      "deadline": "2024-12-15",
-      "projectId": "2a46"
-    },
-    {
-      "id": "0319",
-      "name": "vne nule mue",
-      "assignedTo": "mue wane wow",
-      "status": "Completed",
-      "deadline": "2024-12-21",
-      "projectId": "2a46"
+      "projectId": "39c6"
     }
   ],
   "teamMembers": [
     {
-      "id": "2d82",
-      "name": "DILNA DILEEP",
-      "role": "Deve",
-      "projectId": "53c3",
-      "taskId": "5730"
+      "id": "dddc",
+      "name": "Dilna",
+      "role": "Developer",
+      "projectId": "5a0a",
+      "taskId": "5cf8"
     },
     {
-      "id": "ae0b",
-      "name": "DILNA DILEEP",
-      "role": "Designer",
-      "projectId": "",
-      "taskId": "2435"
+      "id": "3421",
+      "name": "nune dvoe",
+      "role": "Hr"
     },
     {
-      "id": "1c1c",
-      "name": "Dev p",
-      "role": "Hr",
-      "projectId": "53c3"
-    },
-    {
-      "id": "6f55",
-      "name": "Teena ",
-      "role": "Designer",
-      "projectId": "53c3"
-    },
-    {
-      "id": "5a77",
-      "name": "Dane kake",
-      "role": "Snippet",
-      "projectId": "ac42",
-      "taskId": "f19e"
-    },
-    {
-      "id": "6aca",
-      "name": "mds s ad ad",
-      "role": "dmmdma",
-      "projectId": null,
-      "taskId": null
+      "id": "c0dd",
+      "name": "Crew pap",
+      "role": "Deve"
     }
   ]
 }

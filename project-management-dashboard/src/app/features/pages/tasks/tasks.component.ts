@@ -18,11 +18,11 @@ export class TasksComponent implements OnInit {
   taskStatuses = ['Pending', 'Completed'];
   isEditModalOpen: boolean = false;
   selectedTask: any = {};
-  sortBy: string = '';
   filterBy: string = '';
-  currentTask = { name: '', assignedTo: '', status: '', deadline: '', projectId: null as number | null };  // Fix the type here
-  selectedProjectId: number | null = null;  // Store selected project ID
-  minDate: string = ''; // This will store the minimum allowed date
+  currentTask = { name: '', assignedTo: '', status: '', deadline: '', projectId: null as number | null };  
+  selectedProjectId: number | null = null;  
+  minDate: string = ''; 
+
 
   constructor(
     private taskService: TaskService,
@@ -37,8 +37,24 @@ export class TasksComponent implements OnInit {
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
 
+    
   }
-
+  isPastDate(): boolean {
+    if (!this.currentTask.deadline) return false;
+  
+    const enteredDate = new Date(this.currentTask.deadline).setHours(0, 0, 0, 0); // Remove time part
+    const todayDate = new Date(this.minDate).setHours(0, 0, 0, 0); // Today at midnight
+    return enteredDate < todayDate;
+  }
+  isEditPastDate(): boolean {
+    if (!this.selectedTask.deadline) return false;
+  
+    const enteredDate = new Date(this.selectedTask.deadline).setHours(0, 0, 0, 0); // Remove time part
+    const todayDate = new Date(this.minDate).setHours(0, 0, 0, 0); // Today at midnight
+    return enteredDate < todayDate;
+  }
+  
+  
   loadTasks(): void {
     this.taskService.getTasks().subscribe((data) => {
       this.tasks = data;
@@ -58,23 +74,21 @@ export class TasksComponent implements OnInit {
   }
 
 
-  openModal(task: any = null): void {
-    // Open the modal for adding a task
+  openModal(): void {
     this.isModalOpen = true;
   }
 
   closeModal(): void {
-    // Close the modal after adding a task
     this.isModalOpen = false;
     this.currentTask = { name: '', assignedTo: '', status: '', deadline: '', projectId: null as number | null }; // Reset form after closing modal
   }
 
-  saveTask(): void {
     // Add new task with associated projectId
-    this.currentTask.projectId = this.selectedProjectId;  // Set the projectId from selectedProjectId
+  saveTask(): void {
+    this.currentTask.projectId = this.selectedProjectId;  
     this.taskService.addTask(this.currentTask).subscribe(() => {
       this.loadTasks();
-      this.closeModal();  // Close modal and reset form
+      this.closeModal();  
     });
   }
 
@@ -85,7 +99,6 @@ export class TasksComponent implements OnInit {
   
 
   closeEditModal(): void {
-    // Close the edit modal
     this.isEditModalOpen = false;
   }
 
@@ -96,15 +109,13 @@ export class TasksComponent implements OnInit {
         if (index > -1) {
           this.tasks[index] = updatedTask;
         }
-        this.closeEditModal(); // Close edit modal after updating
+        this.closeEditModal(); 
       },
       (error) => {
         console.error('Error updating task:', error);
       }
     );
   }
-  
-
 
   deleteTask(id: number): void {
     Swal.fire({
@@ -138,9 +149,5 @@ export class TasksComponent implements OnInit {
       return deadlineA - deadlineB;
     });
   }
-  assignTeamMemberToTask(taskId: number, memberId: number): void {
-    this.taskService.assignTeamMemberToTask(taskId, memberId).subscribe(() => {
-      this.loadTasks();
-    });
-  }
+
 }

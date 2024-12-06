@@ -6,9 +6,10 @@ import { ProjectsComponent } from './features/pages/projects/projects.component'
 import { AuthGuard } from './core/auth/guards/auth.guard';
 import { TasksComponent } from './features/pages/tasks/tasks.component';
 import { TeamMembersComponent } from './features/pages/team-members/team-members.component';
+import { LoginGuard } from './core/auth/guards/login.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent ,canActivate: [LoginGuard]},
   {
     path: 'dashboard',
     component: DashboardComponent,

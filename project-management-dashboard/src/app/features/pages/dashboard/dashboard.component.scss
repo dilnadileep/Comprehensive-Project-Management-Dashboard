@@ -1,3 +1,8 @@
+
+// $breakpoint-mobile: 576px;
+$breakpoint-tablet: 768px;
+// $breakpoint-desktop: 992px;
+
 *{
      font-family: "Poppins", Arial, sans-serif; 
 
@@ -310,36 +315,31 @@
        }
      }
 
-     .chart-section {
-          padding: 50px 20px;
-          background-color: #f9f9f9;
+// Chart Section
+.chart-section {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
 
-          .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            
-          }
+
+  .row {
+    flex-direction: column;
+
+    .col {
+      max-width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media (min-width: $breakpoint-tablet) {
+    .row {
+      flex-direction: row;
+    }
+
+    .col {
+      max-width: 50%;
+    }
+  }
+}
         
-          .row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap; /* Ensure responsiveness */
-            
-          }
-        
-          .col {
-            flex: 1;
-            padding: 20px;
-            max-width: 50%;
-            
-          }
-        
-          .image-content {
-            img {
-              width: 100%;
-              height: auto;
-              display: block;
-            }
-          }
-        }

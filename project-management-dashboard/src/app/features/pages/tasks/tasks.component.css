@@ -204,6 +204,12 @@
   margin-bottom: 20px;
 }
 
+.form-outline input,
+.form-outline select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .form-control {
   width: 100%;
   padding: 12px;
@@ -242,7 +248,9 @@ button[type=submit] {
 }
 
 button[type=submit]:hover {
-  background-color: #3498db;
+  background-color: white;
+  border-color: #2980b9;
+  color: #3498db;
 }
 
 /* Button trigger modal */
@@ -259,6 +267,22 @@ button[type=submit]:hover {
 .btn-primary:hover {
   background-color: white;
   color: #2980b9;
+  border-color: #2980b9;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #2980b9;
+  border: 2px solid #2980b9;
+  font-weight: bold;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #2980b9;
+  color: white;
   border-color: #2980b9;
 }
 

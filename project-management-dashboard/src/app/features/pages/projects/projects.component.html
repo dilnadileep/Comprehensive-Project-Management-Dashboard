@@ -40,81 +40,94 @@
 
 
   <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" *ngIf="isModalOpen">
-  <div class="modal-dialog d-flex justify-content-center">
-    <div class="modal-content w-75">
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Add New Project</h5>
-        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" data-mdb-button-init data-mdb-ripple-init></button>
-      </div>
-      
-      <!-- Modal Body -->
-      <div class="modal-body p-4">
-        <form (ngSubmit)="addProject()" #projectForm="ngForm" novalidate>
-          <!-- Name input -->
-          <div class="form-outline mb-4" data-mdb-input-init>
-            <label class="form-label" for="name">Project Name</label>
-            <input
-              type="text"
-              id="name"
-              [(ngModel)]="newProject.name"
-              name="name"
-              required
-              #name="ngModel"
-              class="form-control"
-              [class.is-invalid]="name.invalid && name.touched"
-            />
-            <div *ngIf="name.invalid && name.touched" class="text-danger">
-              Project name is required.
+  <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" *ngIf="isModalOpen">
+    <div class="modal-dialog d-flex justify-content-center">
+      <div class="modal-content w-75">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Add New Project</h5>
+          <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close" data-mdb-button-init data-mdb-ripple-init></button>
+        </div>
+        
+        <!-- Modal Body -->
+        <div class="modal-body p-4">
+          <form (ngSubmit)="addProject()" #projectForm="ngForm" novalidate>
+            <!-- Name input -->
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <label class="form-label" for="name">Project Name</label>
+              <input
+                type="text"
+                id="name"
+                [(ngModel)]="newProject.name"
+                name="name"
+                required
+                minlength="3"
+                maxlength="50"
+                pattern="^[a-zA-Z0-9 .,-]*$"
+                #name="ngModel"
+                class="form-control"
+                [class.is-invalid]="name.invalid && name.touched"
+              />
+              <div *ngIf="name.touched">
+                <div *ngIf="name.errors?.['required']" class="text-danger">Project Name is required.</div>
+                <div *ngIf="name.errors?.['minlength']" class="text-danger">Project Name must be at least 3 characters.</div>
+                <div *ngIf="name.errors?.['maxlength']" class="text-danger">Project Name must be less than 50 characters.</div>
+                <div *ngIf="name.errors?.['pattern']" class="text-danger">Invalid characters in Project Name.</div>
+            </div>  
             </div>
-          </div>
 
-          <!-- Description input -->
-          <div class="form-outline mb-4" data-mdb-input-init>
-            <label class="form-label" for="description">Description</label>
-            <textarea
-              id="description"
-              [(ngModel)]="newProject.description"
-              name="description"
-              required
-              #description="ngModel"
-              class="form-control"
-              [class.is-invalid]="description.invalid && description.touched"
-            ></textarea>
-            <div *ngIf="description.invalid && description.touched" class="text-danger">
-              Description is required.
+            <!-- Description input -->
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <label class="form-label" for="description">Description</label>
+              <textarea
+                id="description"
+                [(ngModel)]="newProject.description"
+                name="description"
+                required
+                minlength="10"
+                maxlength="50"
+                pattern="^[a-zA-Z0-9 .,-]*$"
+                #description="ngModel"
+                class="form-control"
+                [class.is-invalid]="description.invalid && description.touched"
+              ></textarea>
+              <div *ngIf="description.touched">
+                <div *ngIf="description.errors?.['required']" class="text-danger">Description is required.</div>
+                <div *ngIf="description.errors?.['minlength']" class="text-danger">Description must be at least 10 characters.</div>
+                <div *ngIf="description.errors?.['maxlength']" class="text-danger">Description must be less than 50 characters.</div>
+                <div *ngIf="description.errors?.['pattern']" class="text-danger">Invalid characters in Description</div>
             </div>
-          </div>
-
-          <!-- Deadline input -->
-          <div class="form-outline mb-4" data-mdb-input-init>
-            <label class="form-label" for="deadline">Deadline</label>
-            <input
-              id="deadline"
-              type="date"
-              [(ngModel)]="newProject.deadline"
-              name="deadline"
-              required
-              #deadline="ngModel"
-              class="form-control"
-              [class.is-invalid]="deadline.invalid && deadline.touched"
-              [attr.min]="minDate"
-            />
-            <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
-              Deadline is required.
             </div>
-          </div>
 
-          <!-- Form Actions -->
-          <div class="form-actions d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Save</button>
-            <button type="button" (click)="closeModal()" class="btn btn-secondary" data-mdb-dismiss="modal" aria-label="Close">Cancel</button>
-          </div>
-        </form>
+            <!-- Deadline input -->
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <label class="form-label" for="deadline">Deadline</label>
+              <input
+                id="deadline"
+                type="date"
+                [(ngModel)]="newProject.deadline"
+                name="deadline"
+                required
+                #deadline="ngModel"
+                class="form-control"
+                [class.is-invalid]="deadline.invalid && deadline.touched"
+                [attr.min]="minDate"
+              />
+              <div *ngIf="deadline.touched">
+                <div *ngIf="deadline.errors?.['required']" class="text-danger">Deadline is required.</div>
+                <div *ngIf="deadline.errors?.['min'] || isPastDate()" class="text-danger">Deadline must be today or later.</div>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions d-flex justify-content-between">
+              <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Save</button>
+              <button type="button" (click)="closeModal()" class="btn btn-secondary" data-mdb-dismiss="modal" aria-label="Close">Cancel</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </div>

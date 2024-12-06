@@ -1,3 +1,7 @@
+* {
+  font-family: "Poppins", Arial, sans-serif;
+}
+
 .gradient-custom {
   /* fallback for old browsers */
   background: #c8c4f1;
@@ -13,4 +17,8 @@
 
 .error-message {
   color: red;
+}
+
+.logbtn:hover {
+  background-color: rgb(74, 138, 240);
 }/*# sourceMappingURL=login.component.css.map */

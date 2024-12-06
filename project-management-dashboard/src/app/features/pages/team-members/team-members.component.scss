@@ -97,10 +97,23 @@
   color: #2980b9;
   border-color: #2980b9;
 }
+.btn-teritiory {
+  background-color: white;
+  color: #2980b9;
+  border: 2px solid #2980b9;
+}
 
-.btn-secondary {
+.btn-teritiory:hover {
   background-color: #2980b9;
   color: white;
+  border-color: #2980b9;
+}
+.text-danger{
+  color: red;
+}
+.btn-secondary {
+  background-color: white;
+  color: #197bbd;
   border: 2px solid #2980b9;
   font-size: 0.8rem;
   font-weight: 150;
@@ -108,8 +121,8 @@
 }
 
 .btn-secondary:hover {
-  background-color: white;
-  color: #2980b9;
+  background-color: #2980b9;
+  color: white;
   border-color: #2980b9;
 }
 
@@ -206,7 +219,6 @@
 }
 
 button[type="submit"] {
-  width: 100%;
   padding: 12px;
   font-size: 1rem;
   background-color: #2980b9;
@@ -217,45 +229,32 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #3498db;
-}
-
-/* Button trigger modal */
-.btn-primary {
-  background-color: #2980b9;
-  color: white;
-  border: 2px solid #2980b9;
-  font-weight: bold;
-  padding: 10px 10px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.btn-primary:hover {
-  background-color: white;
-  color: #2980b9;
   border-color: #2980b9;
+  background-color: white;
+  border-color: #2980b9;
+  color: #3498db;
+
 }
+
 
 /* Button Actions */
 .form-actions {
   display: flex;
-  justify-content: space-between; /* Space out the buttons */
-  gap: 10px; /* Add space between the buttons */
+  justify-content: space-between; 
+  gap: 10px; 
 }
 
 button[type="submit"],
 button[type="button"] {
-  width: 48%; /* Ensure both buttons are of the same width */
+  width: 48%; 
   padding: 12px;
   font-size: 1rem;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .modal-content {
     padding: 20px;
-    max-width: 90%; /* Ensure responsiveness */
+    max-width: 90%; 
   }
 
   .modal-title {

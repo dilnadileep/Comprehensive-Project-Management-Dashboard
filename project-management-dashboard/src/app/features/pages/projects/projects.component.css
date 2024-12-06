@@ -124,6 +124,22 @@
   border-color: #2980b9;
 }
 
+.btn-secondary {
+  background-color: #f2f5f7;
+  color: #2980b9;
+  border: 2px solid #2980b9;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #2980b9;
+  color: white;
+  border-color: #2980b9;
+}
+
 .btn-danger {
   background-color: #f03649;
   font-size: 18px;
@@ -286,7 +302,9 @@ button[type=submit] {
 }
 
 button[type=submit]:hover {
-  background-color: #3498db;
+  background-color: white;
+  color: #3498db;
+  border-color: #2980b9;
 }
 
 /* Button Actions */

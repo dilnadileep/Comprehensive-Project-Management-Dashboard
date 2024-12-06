@@ -1,9 +1,13 @@
+*{
+  font-family: "Poppins", Arial, sans-serif; 
+
+}
   .gradient-custom {
     /* fallback for old browsers */
     background: #c8c4f1;
 
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgb(222, 221, 245), rgb(170, 186, 212));
+    background: -webkit-linear-gradient(to right, rgb(222, 221, 245), rgb(165, 181, 215));
 
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgb(204, 201, 242), rgb(149, 178, 227));
@@ -15,4 +19,9 @@
   }
   .error-message{
     color: red;
+  }
+
+  .logbtn:hover{
+    background-color: rgb(74, 138, 240);
+
   }

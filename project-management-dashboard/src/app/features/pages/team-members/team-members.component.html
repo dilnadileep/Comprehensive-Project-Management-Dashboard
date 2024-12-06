@@ -69,13 +69,19 @@
               [(ngModel)]="newTeamMember.name"
               name="name"
               required
+              minlength="3"
+              maxlength="50"
+              pattern="^[a-zA-Z0-9 .,-]*$"
               #name="ngModel"
               class="form-control"
               [class.is-invalid]="name.invalid && name.touched"
             />
-            <div *ngIf="name.invalid && name.touched" class="text-danger">
-              Name is required.
-            </div>
+            <div *ngIf="name.touched">
+              <div *ngIf="name.errors?.['required']" class="text-danger">Name is required.</div>
+              <div *ngIf="name.errors?.['minlength']" class="text-danger">Name must be at least 3 characters.</div>
+              <div *ngIf="name.errors?.['maxlength']" class="text-danger">Name must be less than 50 characters.</div>
+              <div *ngIf="name.errors?.['pattern']" class="text-danger">Invalid characters in Name</div>
+           </div>
           </div>
 
           <!-- Role Field -->
@@ -86,19 +92,25 @@
               [(ngModel)]="newTeamMember.role"
               name="role"
               required
+              minlength="3"
+              maxlength="20"
+              pattern="^[a-zA-Z0-9 .,-]*$"
               #role="ngModel"
               class="form-control"
               [class.is-invalid]="role.invalid && role.touched"
             />
-            <div *ngIf="role.invalid && role.touched" class="text-danger">
-              Role is required.
-            </div>
+            <div *ngIf="role.touched">
+              <div *ngIf="role.errors?.['required']" class="text-danger">Role is required.</div>
+              <div *ngIf="role.errors?.['minlength']" class="text-danger">Role must be at least 3 characters.</div>
+              <div *ngIf="role.errors?.['maxlength']" class="text-danger">Role must be less than 20 characters.</div>
+              <div *ngIf="role.errors?.['pattern']" class="text-danger">Invalid characters in Role</div>
+           </div>
           </div>
 
           <!-- Form Buttons -->
           <div class="form-actions mt-3">
             <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid">Save</button>
-            <button type="button" class="btn btn-secondary" (click)="closeAddModal()">Cancel</button>
+            <button type="button" class="btn btn-teritiory" (click)="closeAddModal()">Cancel</button>
           </div>
         </form>
       </div>

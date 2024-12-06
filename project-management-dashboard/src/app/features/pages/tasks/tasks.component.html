@@ -10,7 +10,7 @@
     <div class="filters">
       <div class="filters-left">
         <select [(ngModel)]="filterBy" (change)="filterTasks()" class="btn btn-primary">
-          <option value="">Filter by Status</option>
+          <option value="">All</option>
           <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
         </select>
       </div>
@@ -68,18 +68,24 @@
                 <label for="name" class="form-label">Task Name</label>
                 <input
                   id="name"
-                  [(ngModel)]
-                  ="currentTask.name"
+                  [(ngModel)]="currentTask.name"
                   name="name"
                   required
+                  minlength="3"
+                  maxlength="50"
+                  pattern="^[a-zA-Z0-9 .,-]*$"
                   class="form-control"
                   #name="ngModel"
                   [class.is-invalid]="name.invalid && name.touched"
                 />
-                <div *ngIf="name.invalid && name.touched" class="text-danger">
-                  Task Name is required.
-                </div>
+                <div *ngIf="name.touched">
+                  <div *ngIf="name.errors?.['required']" class="text-danger">Task Name is required.</div>
+                  <div *ngIf="name.errors?.['minlength']" class="text-danger">Task Name must be at least 3 characters.</div>
+                  <div *ngIf="name.errors?.['maxlength']" class="text-danger">Task Name must be less than 50 characters.</div>
+                  <div *ngIf="name.errors?.['pattern']" class="text-danger">Invalid characters in Task Name.</div>
+               </div>                
               </div>
+              
     
               <!-- Assigned To Field -->
               <div class="form-outline mb-4">
@@ -96,11 +102,11 @@
                   <option value="" disabled>Select Team Member</option>
                   <option *ngFor="let member of teamMembers" [value]="member.id">{{ member.name }}</option>
                 </select>
-                <div *ngIf="assignedTo.invalid && assignedTo.touched" class="text-danger">
-                  Assigned To is required.
+                <div *ngIf="assignedTo.touched">
+                  <div *ngIf="assignedTo.errors?.['required']" class="text-danger">Please assign a team member.</div>
                 </div>
               </div>
-    
+              
               <!-- Status Field -->
               <div class="form-outline mb-4">
                 <label for="status" class="form-label">Status</label>
@@ -116,29 +122,31 @@
                   <option value="" disabled>Select Status</option>
                   <option *ngFor="let status of taskStatuses" [value]="status">{{ status }}</option>
                 </select>
-                <div *ngIf="status.invalid && status.touched" class="text-danger">
-                  Status is required.
+                <div *ngIf="status.touched">
+                  <div *ngIf="status.errors?.['required']" class="text-danger">Please select a task status.</div>
                 </div>
               </div>
+              
     
               <!-- Deadline Field -->
               <div class="form-outline mb-4">
                 <label for="deadline" class="form-label">Deadline</label>
                 <input
-                  id="deadline"
-                  type="date"
-                  [(ngModel)]="currentTask.deadline"
-                  name="deadline"
-                  required
-                  class="form-control"
-                  [attr.min]="minDate"
-                  #deadline="ngModel"
-                  [class.is-invalid]="deadline.invalid && deadline.touched"
-                />
-                <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
-                  Deadline is required.
-                </div>
+                id="deadline"
+                type="date"
+                [(ngModel)]="currentTask.deadline"
+                name="deadline"
+                required
+                class="form-control"
+                [attr.min]="minDate"
+                #deadline="ngModel"
+                [class.is-invalid]="deadline.invalid && deadline.touched"
+              />
+              <div *ngIf="deadline.touched">
+                <div *ngIf="deadline.errors?.['required']" class="text-danger">Deadline is required.</div>
+                <div *ngIf="deadline.errors?.['min'] || isPastDate()" class="text-danger">Deadline must be today or later.</div>
               </div>
+            </div>              
     
               <!-- Project Field -->
               <div class="form-outline mb-4">
@@ -147,7 +155,7 @@
                   <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
                 </select>
               </div>
-    
+
               <!-- Form Actions -->
               <div class="form-actions mt-3">
                 <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Save</button>
@@ -241,8 +249,9 @@
               [attr.min]="minDate"
               [class.is-invalid]="deadline.invalid && deadline.touched"
             />
-            <div *ngIf="deadline.invalid && deadline.touched" class="text-danger">
-              Deadline is required.
+            <div *ngIf="deadline.touched">
+              <div *ngIf="deadline.errors?.['required']" class="text-danger">Deadline is required.</div>
+              <div *ngIf="deadline.errors?.['min'] || isEditPastDate()" class="text-danger">Deadline must be today or later.</div>
             </div>
           </div>
 

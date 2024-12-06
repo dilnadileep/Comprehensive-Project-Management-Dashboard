@@ -63,4 +63,18 @@
   .navbar ul li a {
     font-size: 1rem;
   }
+}
+.logout-button {
+  background-color: #84a5fa;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: auto;
+}
+.logout-button:hover {
+  background-color: white;
+  color: #84a5fa;
 }/*# sourceMappingURL=navbar.component.css.map */

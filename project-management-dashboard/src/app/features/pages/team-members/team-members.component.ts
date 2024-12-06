@@ -62,7 +62,7 @@ export class TeamMembersComponent implements OnInit {
   saveTeamMember(): void {
     this.teamMemberService.addTeamMember(this.newTeamMember).subscribe(() => {
       this.loadTeamMembers();
-      this.closeAddModal();  // Close modal after saving
+      this.closeAddModal(); 
     });
   }
 
@@ -77,31 +77,22 @@ export class TeamMembersComponent implements OnInit {
     this.isModalOpen = false;
     this.selectedAssignId = null; // Reset selection
   }
-
+//assigning team member with project and task 
   assignMember(): void {
     if (this.selectedAssignId !== null) {
       if (this.assignTo === 'project') {
-        this.selectedMember.projectId = this.selectedAssignId;
+        this.selectedMember.projectId = this.selectedAssignId; // Update the team member with the project ID
       } else if (this.assignTo === 'task') {
-        // Update the team member with the task ID
         this.selectedMember.taskId = this.selectedAssignId;
-  
-        // Assign the team member to the task in the task table
-        this.taskService.assignTeamMemberToTask(this.selectedAssignId, this.selectedMember.id).subscribe(() => {
-          this.loadTasks(); // Refresh the task list
-          this.loadTeamMembers(); // Refresh the team members list
-          this.closeModal();
-        });
+        
       }
-      
       // Save the updated team member to the server
       this.teamMemberService.updateTeamMember(this.selectedMember).subscribe(() => {
-        this.loadTeamMembers(); // Refresh the team members list
+        this.loadTeamMembers(); 
         this.closeModal();
       });
     }
   }
-  
 
   deleteTeam(id: number): void {
     Swal.fire({
@@ -115,21 +106,11 @@ export class TeamMembersComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.teamMemberService.deleteTeamMember(id).subscribe(() => {
-          this.loadTasks();
+          this.loadTeamMembers();
           Swal.fire('Deleted!', 'This team member has been deleted.', 'success');
         });
       }
     });
   }
-  
-  getProjectName(projectId: number): string {
-    const project = this.projects.find(p => p.id === projectId);
-    return project ? project.name : 'No project assigned';
-  }
-  getTaskName(taskId: number): string {
-    const task = this.tasks.find(t => t.id === taskId);
-    return task ? task.name : 'No task assigned'; // Assuming tasks have a 'title' property
-  }
-  
   
 }

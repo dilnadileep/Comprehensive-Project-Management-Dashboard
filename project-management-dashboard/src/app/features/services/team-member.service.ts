@@ -25,11 +25,4 @@ export class TeamMemberService {
   deleteTeamMember(memberId: number): Observable<any> {
     return this.http.delete(`${this.endpoint}/${memberId}`);
   }
-  assignToProject(memberId: number, projectId: number): Observable<any> {
-    return this.http.patch<any>(`${this.endpoint}/${memberId}`, { projectId });
-  }
-
-  assignToTask(memberId: number, taskId: number): Observable<any> {
-    return this.http.patch<any>(`${this.endpoint}/${memberId}`, { taskId });
-  }
 }

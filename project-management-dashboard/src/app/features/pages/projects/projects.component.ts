@@ -25,6 +25,14 @@ export class ProjectsComponent implements OnInit {
       this.projects = data;
     });
   }
+  isPastDate(): boolean {
+    if (!this.newProject.deadline) return false;
+  
+    const enteredDate = new Date(this.newProject.deadline).setHours(0, 0, 0, 0); // Remove time part
+    const todayDate = new Date(this.minDate).setHours(0, 0, 0, 0); // Today at midnight
+    return enteredDate < todayDate;
+  }
+
   loadProjects(): void {
     this.projectService.getProjects().subscribe((data) => {
       this.projects = data;  // Store projects
@@ -38,6 +46,7 @@ export class ProjectsComponent implements OnInit {
   closeModal(): void {
     // Closes the modal
     this.isModalOpen = false;
+    this.newProject = { name: '', description: '', deadline: '' };
   }
 
   addProject(): void {

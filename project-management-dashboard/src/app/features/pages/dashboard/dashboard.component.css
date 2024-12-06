@@ -259,26 +259,23 @@
 }
 
 .chart-section {
-  padding: 50px 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 40px 20px;
   background-color: #f9f9f9;
 }
-.chart-section .container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
 .chart-section .row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap; /* Ensure responsiveness */
+  flex-direction: column;
 }
-.chart-section .col {
-  flex: 1;
-  padding: 20px;
-  max-width: 50%;
+.chart-section .row .col {
+  max-width: 100%;
+  text-align: center;
 }
-.chart-section .image-content img {
-  width: 100%;
-  height: auto;
-  display: block;
+@media (min-width: 768px) {
+  .chart-section .row {
+    flex-direction: row;
+  }
+  .chart-section .col {
+    max-width: 50%;
+  }
 }/*# sourceMappingURL=dashboard.component.css.map */

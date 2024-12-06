@@ -279,6 +279,13 @@
   outline: none;
 }
 
+.form-outline input,
+.form-outline select,
+.form-outline textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .form-label {
   font-size: 1rem;
   color: #555;

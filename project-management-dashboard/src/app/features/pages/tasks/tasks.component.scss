@@ -211,10 +211,9 @@
 .form-outline input,
 .form-outline select {
   width: 100%; 
-  box-sizing: border-box; // Ensures padding doesn't affect width
-
-
+  box-sizing: border-box; 
 }
+
 .form-control {
   width: 100%;
   padding: 12px;
@@ -378,3 +377,4 @@ button[type="button"] {
     transform: scale(1.2);
     opacity: 0.8;
   }
+  

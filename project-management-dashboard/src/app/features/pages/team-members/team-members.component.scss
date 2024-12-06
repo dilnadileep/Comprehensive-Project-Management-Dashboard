@@ -28,7 +28,12 @@
   color: #757575;
   margin-bottom: 20px;
 }
-
+.form-outline input,
+.form-outline select,
+.form-outline textarea{
+  width: 100%; 
+  box-sizing: border-box; 
+}
 
 
 /* Table */
